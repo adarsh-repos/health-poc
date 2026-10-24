@@ -1,25 +1,77 @@
 {
   "expo": {
-    "name": "health-mvp-tmp",
-    "slug": "health-mvp-tmp",
+    "name": "Medifyles",
+    "slug": "poc",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.medifyles.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Medifyles uses the camera to photograph your prescriptions and reports.",
+        "NSPhotoLibraryUsageDescription": "Medifyles lets you choose photos of your medical documents."
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0A0A0B",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.medifyles.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F6F5F2",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 96,
+          "dark": {
+            "backgroundColor": "#0A0A0B",
+            "image": "./assets/splash-icon.png"
+          }
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Medifyles lets you choose photos of your medical documents.",
+          "cameraPermission": "Medifyles uses the camera to photograph your prescriptions and reports."
+        }
+      ],
+      "expo-image",
+      "expo-sharing",
+      "expo-status-bar"
+    ],
+    "scheme": "medifyles",
+    "backgroundColor": "#F6F5F2",
+    "experiments": {
+      "typedRoutes": true
+    },
+    "owner": "offscreen-hq",
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "ec6a57a8-a5df-489e-bcf5-8b7244ae2d26"
+      }
     }
   }
 }
