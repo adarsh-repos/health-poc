@@ -1,0 +1,44 @@
+.section {
+  background: var(--card);
+  border-top: 1px solid var(--stroke);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+}
+
+.inner > :global(.lead) {
+  max-width: 32em;
+}
+
+/* The hero's fanned stack, squared up: the story ends in order. */
+.papers {
+  position: relative;
+  width: 8.5em;
+  height: 11em;
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+.papers > div {
+  position: absolute;
+  inset: 0;
+  width: 13em;
+  font-size: 0.66em;
+}
+.p1 {
+  z-index: 3;
+}
+.p2 {
+  z-index: 2;
+  transform: translate(4px, -5px);
+  filter: brightness(0.97);
+}
+.p3 {
+  z-index: 1;
+  transform: translate(8px, -10px);
+  filter: brightness(0.94);
+}

@@ -1,0 +1,142 @@
+.grid {
+  display: grid;
+  gap: var(--space-4xl);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 8px 18px 8px 8px;
+  border-radius: var(--radius-full);
+  background: var(--fill-glass);
+  text-align: left;
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+.person:active {
+  transform: scale(0.98);
+}
+.person[aria-pressed='true'] {
+  background: var(--card);
+  box-shadow: var(--shadow-soft);
+}
+
+.personText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.personText b {
+  font-size: 1.0625rem;
+}
+.personText span {
+  font-size: 1rem;
+  color: var(--text-2);
+}
+
+/* The app's MemberCard. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  animation: swap 360ms var(--spring);
+}
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--fill-glass);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.pillAmber {
+  background: transparent;
+  border: 1.5px solid var(--amber);
+  color: var(--amber);
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.track {
+  height: 8px;
+  border-radius: 8px;
+  background: var(--fill-glass);
+  overflow: hidden;
+}
+.track span {
+  display: block;
+  height: 100%;
+  border-radius: 8px;
+  background: var(--green);
+  animation: grow 700ms var(--ease-out);
+}
+
+.visual {
+  display: flex;
+  justify-content: center;
+}
+.phone {
+  width: min(84%, 340px);
+}
+.swap {
+  position: absolute;
+  inset: 0;
+  animation: swap 360ms var(--spring);
+}
+
+@keyframes swap {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+/* E7: the counter rule from the app (700ms ease-out), applied to the bar. */
+@keyframes grow {
+  from {
+    width: 0;
+  }
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 6fr 5fr;
+    align-items: center;
+  }
+}

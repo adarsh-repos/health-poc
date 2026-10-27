@@ -1,0 +1,340 @@
+/*
+ * Medifyles website base styles. Colours, spacing and radii come from
+ * src/styles/tokens.css (generated from the app). Never write a hex colour here.
+ * Type and motion follow docs/DESIGN.md §4.3 and §8.
+ */
+
+:root {
+  /* Web-only spacing for section rhythm (DESIGN §4.4). */
+  --space-4xl: 64px;
+  --space-5xl: 96px;
+  --space-6xl: 140px;
+  --gutter: 20px;
+  --max: 1200px;
+  --header-h: 72px;
+
+  /* Motion (DESIGN §8.1). */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --spring: linear(0, 0.06 2.4%, 0.23 5.3%, 0.45 8.9%, 0.69 13.5%, 0.87 18.6%, 0.98 24.5%, 1.03 30.9%, 1.04 36.6%, 1.03 44.3%, 1.01 55%, 1);
+  --dur-press: 120ms;
+  --dur-ui: 200ms;
+  --dur-enter: 300ms;
+
+  --shadow-soft: 0 1px 2px rgb(from var(--shadow) r g b / calc(var(--shadow-alpha) * 0.6)),
+    0 12px 32px rgb(from var(--shadow) r g b / var(--shadow-alpha));
+  --shadow-lift: 0 2px 4px rgb(from var(--shadow) r g b / calc(var(--shadow-alpha) * 0.8)),
+    0 22px 48px rgb(from var(--shadow) r g b / calc(var(--shadow-alpha) * 1.3));
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+/* ---------- Fonts: Figtree (chosen 2026-10-28). Phone screens and papers use Inter, like the app. ---------- */
+
+:root {
+  --font-body: var(--font-figtree);
+  --font-heading: var(--font-figtree);
+  --heading-weight: 800;
+  --subhead-weight: 700;
+  --heading-tracking: -0.022em;
+  --body-tracking: -0.004em;
+}
+
+/* Everything is sized in rem, so the base size here sets the whole type scale. */
+html {
+  font-size: 93.75%; /* 15px base: every rem on the site scales from this */
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--page);
+  color: var(--text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1.125rem; /* ≈17px at the 15px base */
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: var(--body-tracking);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- Type scale (DESIGN §4.3) ---------- */
+
+.display {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: clamp(2.5rem, 5.8vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: var(--heading-tracking);
+  font-weight: var(--heading-weight);
+  text-wrap: balance;
+}
+
+.h2 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: clamp(1.875rem, 3.75vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: calc(var(--heading-tracking) * 0.8);
+  font-weight: var(--subhead-weight);
+  text-wrap: balance;
+}
+
+.h3 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: clamp(1.3125rem, 1.8vw, 1.4375rem);
+  line-height: 1.3;
+  letter-spacing: calc(var(--heading-tracking) * 0.4);
+  font-weight: var(--subhead-weight);
+}
+
+.lead {
+  font-size: clamp(1.125rem, 1.35vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: var(--body-tracking);
+  color: var(--text-2);
+  max-width: 34em;
+  text-wrap: pretty;
+}
+
+.body {
+  color: var(--text-2);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.label {
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.caption {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.overline {
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(var(--space-4xl), 10vw, var(--space-6xl));
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Buttons (app Button: primary / secondary / ghost) ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding-inline: 26px;
+  border-radius: var(--radius-full);
+  max-width: 100%;
+  padding-block: 10px;
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out),
+    border-color var(--dur-ui) var(--ease-out),
+    color var(--dur-ui) var(--ease-out);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn svg {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
+
+.btn-primary {
+  min-height: 60px;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+@media (hover: hover) {
+  .btn-primary:hover {
+    background: color-mix(in srgb, var(--accent) 88%, var(--text));
+  }
+  .btn-secondary:hover {
+    background: var(--fill-glass);
+  }
+  .btn-ghost:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+.btn-secondary {
+  border: 2px solid var(--stroke);
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+  color: var(--text);
+}
+
+.btn-ghost {
+  min-height: 52px;
+  padding-inline: 4px;
+  color: var(--accent-text);
+}
+
+.btn-whatsapp svg {
+  color: var(--green);
+}
+
+/* ---------- Focus (DESIGN §5) ---------- */
+
+:focus-visible {
+  outline: 3px solid var(--accent-text);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.btn:focus-visible {
+  border-radius: var(--radius-full);
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ---------- Category colour (always with an icon and a word) ---------- */
+
+.cat-prescription {
+  --cat: var(--green);
+}
+.cat-lab {
+  --cat: var(--steel-text);
+}
+.cat-bill {
+  --cat: var(--amber);
+}
+
+/* ---------- Entrance (E9): only hidden when JS is running ---------- */
+
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-enter) var(--ease-out),
+    transform var(--dur-enter) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+html.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

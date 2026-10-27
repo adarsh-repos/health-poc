@@ -42,6 +42,14 @@ export interface MemberIdentity {
 export interface Contact {
   name: string;
   phone: string;
+  /** Doctor only: where they practise. */
+  clinic?: string;
+  location?: string;
+}
+
+/** "Apollo Clinic · Indiranagar, Bengaluru", or undefined when neither is set. */
+export function contactPlace(c: Contact): string | undefined {
+  return [c.clinic, c.location].filter(Boolean).join(' · ') || undefined;
 }
 
 export type Gender = 'female' | 'male' | 'other';

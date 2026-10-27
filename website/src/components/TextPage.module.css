@@ -1,0 +1,54 @@
+.page {
+  padding-top: clamp(32px, 6vw, 72px);
+}
+
+.col {
+  max-width: calc(820px + var(--gutter) * 2);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: var(--space-4xl);
+}
+
+.head :global(.display) {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.body h2 {
+  margin-top: 28px;
+  font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.body p,
+.body li {
+  color: var(--text-2);
+  max-width: 62ch;
+}
+
+.body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 1.2em;
+}
+
+.body strong {
+  color: var(--text);
+}
+
+.body a:not(:global(.btn)) {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

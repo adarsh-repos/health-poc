@@ -1,0 +1,126 @@
+/*
+ * E3. Papers are laid out in their *sorted* positions here; the script only
+ * offsets them back into the bag while scrolling. No JS = sorted, readable state.
+ */
+
+.section {
+  position: relative;
+  background: var(--card);
+  border-block: 1px solid var(--stroke);
+}
+
+/* Room to scroll through the animation, only when it actually runs. */
+.section[data-animated='true'] {
+  height: 260vh;
+}
+.section[data-animated='true'] .sticky {
+  position: sticky;
+  top: var(--header-h);
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  align-items: center;
+}
+
+.sticky {
+  width: 100%;
+  padding-block: 32px;
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.payoff {
+  color: var(--accent-text);
+}
+.section[data-animated='true'] .payoff {
+  opacity: clamp(0, calc((var(--p, 1) - 0.72) * 6), 1);
+}
+
+/* ---------- Stage ---------- */
+
+.stage {
+  --w: 26; /* paper width, % of stage width */
+  --row-step: 11; /* % of stage height between stacked papers */
+  --top: 16;
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 58svh;
+  margin-inline: auto;
+  max-width: 58svh;
+}
+
+.bag {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 6%;
+  color: var(--text-3);
+  opacity: calc(1 - var(--p, 1) * 2.4);
+  pointer-events: none;
+}
+
+.person {
+  position: absolute;
+  top: 1%;
+  left: calc((var(--col) * 33.33% + 16.66%));
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: clamp(0, calc((var(--p, 1) - 0.45) * 4), 1);
+}
+
+.paper {
+  position: absolute;
+  left: calc(var(--col) * 33.33% + 16.66% - var(--w) * 0.5%);
+  top: calc((var(--top) + var(--row) * var(--row-step)) * 1%);
+  width: calc(var(--w) * 1%);
+  font-size: calc(var(--w) * 1cqw / 13); /* PaperSheet is 13em wide */
+  will-change: transform;
+}
+.paper > div {
+  width: 100%;
+}
+
+.date {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  background: var(--text);
+  color: var(--page);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: clamp(0, calc((var(--t, 1) - 0.8) * 5), 1);
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 4fr 7fr;
+    align-items: center;
+    gap: 48px;
+  }
+  .stage {
+    --w: 20;
+    --row-step: 10;
+    --top: 14;
+    aspect-ratio: 16 / 11;
+    max-height: none;
+    max-width: none;
+  }
+}

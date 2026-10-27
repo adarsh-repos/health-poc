@@ -1,0 +1,48 @@
+.footer {
+  border-top: 1px solid var(--stroke);
+  padding-top: var(--space-4xl);
+  padding-bottom: calc(var(--space-xxxl) + 88px); /* room for the mobile sticky bar */
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-xxxl);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.link:hover {
+  color: var(--text);
+}
+
+.base {
+  margin-top: var(--space-xxxl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--stroke);
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: 1.4fr 1fr 1.2fr;
+  }
+  .footer {
+    padding-bottom: var(--space-xxxl);
+  }
+}

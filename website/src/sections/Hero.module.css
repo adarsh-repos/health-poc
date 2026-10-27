@@ -1,0 +1,183 @@
+.hero {
+  padding-top: clamp(24px, 5vw, 64px);
+  padding-bottom: clamp(var(--space-4xl), 8vw, var(--space-5xl));
+  overflow: clip;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4xl);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.title {
+  margin-top: -6px;
+}
+
+/* E1: the key word rebuilds itself, letter by letter, in its category colour. */
+.word {
+  display: inline-block;
+  color: var(--cat);
+  white-space: nowrap;
+}
+.word span {
+  display: inline-block;
+  animation: letter 420ms var(--spring) both;
+  animation-delay: calc(var(--i) * 28ms);
+}
+@keyframes letter {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em) rotate(4deg);
+    filter: blur(2px);
+  }
+}
+
+.facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: var(--fill-glass);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.factIcon {
+  color: var(--tone);
+}
+
+/* ---------- Visual: phone + paper stack ---------- */
+
+.visual {
+  position: relative;
+  display: grid;
+  justify-items: end;
+  padding-bottom: 40px;
+  min-height: 0;
+}
+
+.phone {
+  width: min(78%, 330px);
+  transform: rotate(4deg);
+  transform-origin: bottom right;
+}
+
+.stack {
+  position: absolute;
+  left: 0;
+  bottom: 56px;
+  width: 64%;
+  height: 72%;
+  font-size: clamp(12px, 3.4vw, 17px); /* scales the em-sized papers */
+}
+
+.sheet {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-radius: 0.4em;
+  transition:
+    transform 520ms var(--spring),
+    filter var(--dur-ui) var(--ease-out);
+  transform-origin: 50% 100%;
+}
+.sheet[data-pos='0'] {
+  z-index: 3;
+  transform: translate(1.2em, -0.4em) rotate(-3deg);
+}
+.sheet[data-pos='1'] {
+  z-index: 2;
+  transform: translate(3.6em, -1.6em) rotate(7deg);
+  filter: brightness(0.97);
+}
+.sheet[data-pos='2'] {
+  z-index: 1;
+  transform: translate(-0.6em, -2em) rotate(-11deg);
+  filter: brightness(0.94);
+}
+@media (hover: hover) {
+  .sheet:not([data-pos='0']):hover {
+    filter: none;
+  }
+}
+.sheet:focus-visible {
+  outline-offset: 6px;
+}
+
+.dots {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+}
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--stroke);
+  transition:
+    width var(--dur-enter) var(--spring),
+    background-color var(--dur-ui) var(--ease-out);
+}
+.dots .dotOn {
+  width: 24px;
+  background: var(--accent);
+}
+
+/*
+ * Desktop: the whole banner fits one screen under the header (no scrolling to
+ * reach the form). Sizes follow the viewport height as well as its width.
+ */
+@media (min-width: 960px) {
+  .hero {
+    --hero-h: calc(100svh - var(--header-h));
+    min-height: var(--hero-h);
+    display: flex;
+    align-items: center;
+    padding-block: clamp(16px, 3.5vh, 40px);
+  }
+  .grid {
+    grid-template-columns: 11fr 10fr;
+    align-items: center;
+    gap: 48px;
+  }
+  .copy {
+    gap: clamp(12px, 2.2vh, 22px);
+  }
+  .title {
+    font-size: clamp(2.5rem, min(5.2vw, 8.4vh), 4.5rem);
+  }
+  .visual {
+    padding-bottom: 40px;
+  }
+  /* The phone is about 2.17× as tall as wide: keep it within the banner's height. */
+  .phone {
+    width: min(70%, 330px, calc((var(--hero-h) - 120px) / 2.17));
+  }
+  .stack {
+    left: 7%; /* keep the fanned papers clear of the copy column */
+    font-size: clamp(12px, min(1.25vw, 2vh), 17px);
+    bottom: 52px;
+  }
+}
+
+/* Short laptop screens: drop the secondary link so the form and facts still fit. */
+@media (min-width: 960px) and (max-height: 780px) {
+  .more {
+    display: none;
+  }
+}

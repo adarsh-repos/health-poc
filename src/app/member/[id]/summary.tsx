@@ -7,7 +7,7 @@ import { StyleSheet, View } from 'react-native';
 import { AppText, Screen, TopBar } from '@/components/ui';
 import { ageOf } from '@/features/family/health';
 import { useMember } from '@/features/family/store';
-import { NONE_KNOWN, type Contact } from '@/features/family/types';
+import { contactPlace, NONE_KNOWN, type Contact } from '@/features/family/types';
 import { colors, fonts, radius, space, themedStyles } from '@/theme/tokens';
 
 const GENDER = { female: 'Female', male: 'Male', other: 'Other' } as const;
@@ -133,6 +133,11 @@ function ContactText({ contact }: { contact?: Contact }) {
   return (
     <>
       <AppText variant="heading">{contact.name}</AppText>
+      {contactPlace(contact) && (
+        <AppText variant="bodyStrong" tone="secondary">
+          {contactPlace(contact)}
+        </AppText>
+      )}
       <AppText variant="bodyStrong" tone="secondary">
         +91 {contact.phone.slice(0, 5)} {contact.phone.slice(5)}
       </AppText>

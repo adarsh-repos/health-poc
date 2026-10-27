@@ -1,0 +1,77 @@
+.section {
+  /* The app's health-card wash: the only gradient on the site. */
+  background: linear-gradient(170deg, var(--wash-1), var(--page) 55%);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4xl);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+.points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 34em;
+}
+
+.pointIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  color: var(--accent-text);
+}
+.pointIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  perspective: 1400px;
+}
+
+/* E5: turns from facing the user to facing the viewer, the way the phone is handed over. */
+.turn {
+  width: min(84%, 340px);
+  transform: rotateY(-22deg) rotateX(6deg) scale(0.94);
+  transform-origin: 70% 50%;
+  transition: transform 1000ms var(--ease-out);
+}
+:global(.is-in) > .turn {
+  transform: none;
+}
+html:not(:global(.js)) .turn {
+  transform: none;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 5fr 6fr;
+    align-items: center;
+  }
+  .visual {
+    order: -1;
+  }
+}

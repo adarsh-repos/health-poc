@@ -48,6 +48,8 @@ export default function EditHealth() {
   const contactKey = section === 'doctor' || section === 'emergency' ? section : null;
   const [cName, setCName] = useState(contactKey ? (h[contactKey]?.name ?? '') : '');
   const [cPhone, setCPhone] = useState(contactKey ? (h[contactKey]?.phone ?? '') : '');
+  const [cClinic, setCClinic] = useState(h.doctor?.clinic ?? '');
+  const [cLocation, setCLocation] = useState(h.doctor?.location ?? '');
 
   if (!member || !section) return null;
 
@@ -84,8 +86,12 @@ export default function EditHealth() {
     } else if (listKey) {
       updateHealth(member.id, { [listKey]: items });
     } else if (contactKey) {
+      const place =
+        section === 'doctor'
+          ? { clinic: cClinic.trim() || undefined, location: cLocation.trim() || undefined }
+          : {};
       updateHealth(member.id, {
-        [contactKey]: cName.trim() && cPhone ? { name: cName.trim(), phone: cPhone } : undefined,
+        [contactKey]: cName.trim() && cPhone ? { name: cName.trim(), phone: cPhone, ...place } : undefined,
       });
     }
     router.back();
@@ -187,6 +193,24 @@ export default function EditHealth() {
               </AppText>
             }
           />
+          {section === 'doctor' && (
+            <>
+              <TextField
+                label="Hospital / clinic (optional)"
+                value={cClinic}
+                onChangeText={setCClinic}
+                autoCapitalize="words"
+                placeholder="e.g. Apollo Clinic"
+              />
+              <TextField
+                label="Location (optional)"
+                value={cLocation}
+                onChangeText={setCLocation}
+                autoCapitalize="words"
+                placeholder="e.g. Indiranagar, Bengaluru"
+              />
+            </>
+          )}
         </>
       )}
     </Screen>

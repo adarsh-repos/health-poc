@@ -1,0 +1,129 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: var(--space-4xl);
+}
+
+.grid {
+  display: grid;
+}
+
+.phoneCol {
+  display: none;
+}
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5xl);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stepHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 220px;
+  color: var(--text-2);
+}
+
+/* The app's StepHeader: a 4px progress bar in coral. */
+.bar {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--fill-glass);
+  overflow: hidden;
+}
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+.inlinePhone {
+  width: min(82%, 320px);
+  margin-top: 12px;
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: var(--space-4xl);
+}
+
+@media (min-width: 960px) {
+  .head {
+    margin-bottom: var(--space-xxxl);
+  }
+  .grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 64px;
+  }
+  .phoneCol {
+    display: block;
+  }
+  /*
+   * The phone is about 2.17× as tall as it is wide. Size it to fit the space under
+   * the header (max 300 wide), and keep it centred there while the steps pass.
+   */
+  .sticky {
+    --phone-w: min(300px, calc((100vh - var(--header-h) - 48px) / 2.17));
+    position: sticky;
+    top: calc(var(--header-h) + (100vh - var(--header-h) - var(--phone-w) * 2.17) / 2);
+  }
+  .phone {
+    width: var(--phone-w);
+    margin-inline: auto;
+  }
+  .screen {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.985);
+    transition:
+      opacity 360ms var(--ease-out),
+      transform 360ms var(--ease-out);
+  }
+  .screen[data-on='true'] {
+    opacity: 1;
+    transform: none;
+  }
+  .steps {
+    gap: 0;
+  }
+  /*
+   * Each step holds the screen for roughly half a viewport: enough for the phone
+   * to change in step with the copy, without long empty gaps between steps.
+   */
+  .steps {
+    padding-block: 8vh;
+  }
+  .step {
+    min-height: clamp(340px, 50vh, 480px);
+    justify-content: center;
+  }
+  /* Active step: label and bar light up. Text is never dimmed (contrast). */
+  .step .stepHeader {
+    transition: color var(--dur-ui) var(--ease-out);
+  }
+  .step[data-on='true'] .stepHeader {
+    color: var(--accent-text);
+  }
+  .inlinePhone {
+    display: none;
+  }
+  .cta {
+    align-items: center;
+    text-align: center;
+  }
+}

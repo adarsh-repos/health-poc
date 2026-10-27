@@ -8,7 +8,7 @@ import { AppText, Avatar, Button, IconTile, PressableScale, Screen, TopBar } fro
 import { ageOf, profileProgress, type HealthSection } from '@/features/family/health';
 import { RelationTag } from '@/features/family/PersonSwitcher';
 import { useFamily, useMember } from '@/features/family/store';
-import { NONE_KNOWN, RELATION_LABELS, type Contact } from '@/features/family/types';
+import { contactPlace, NONE_KNOWN, RELATION_LABELS, type Contact } from '@/features/family/types';
 import { useRecordCountByMember } from '@/features/records/selectors';
 import { useSession } from '@/features/session/store';
 import { colors, radius, space, themedStyles } from '@/theme/tokens';
@@ -253,6 +253,11 @@ function ContactRow({ contact }: { contact?: Contact }) {
     <View style={styles.row}>
       <View style={{ flex: 1 }}>
         <AppText variant="bodyStrong">{contact.name}</AppText>
+        {contactPlace(contact) && (
+          <AppText variant="caption" tone="secondary">
+            {contactPlace(contact)}
+          </AppText>
+        )}
         <AppText variant="caption" tone="secondary">
           +91 {contact.phone.slice(0, 5)} {contact.phone.slice(5)}
         </AppText>

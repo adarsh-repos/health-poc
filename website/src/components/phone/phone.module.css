@@ -1,0 +1,672 @@
+/* The phone screen is laid out in app pixels: calc(var(--u) * N) = N px on a 390-wide phone. */
+
+.frame {
+  container-type: inline-size;
+  width: 100%;
+  padding: 3%;
+  border-radius: 13% / 6%;
+  background: var(--sheet);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow-lift);
+}
+
+.screen {
+  --u: calc(100cqw / 390);
+  position: relative;
+  aspect-ratio: 390 / 844;
+  overflow: hidden;
+  border-radius: calc(var(--u) * 44);
+  background: var(--page);
+  color: var(--text);
+  /* Always the app's font, whatever the site uses: these are the real screens. */
+  font-family: var(--font-inter), system-ui, sans-serif;
+  letter-spacing: 0;
+  font-size: calc(var(--u) * 17);
+  line-height: 1.35;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(var(--u) * 50);
+  padding-inline: calc(var(--u) * 30);
+  font-size: calc(var(--u) * 15);
+  font-weight: 700;
+}
+.island {
+  width: calc(var(--u) * 110);
+  height: calc(var(--u) * 30);
+  border-radius: 99px;
+  background: var(--shadow);
+}
+.battery {
+  width: calc(var(--u) * 26);
+  height: calc(var(--u) * 12);
+  border-radius: calc(var(--u) * 4);
+  border: calc(var(--u) * 2) solid currentColor;
+  opacity: 0.8;
+}
+
+.page {
+  position: absolute;
+  inset: calc(var(--u) * 50) 0 0;
+  padding: calc(var(--u) * 10) calc(var(--u) * 20) 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 12);
+}
+.center {
+  align-items: center;
+  text-align: center;
+  padding-top: calc(var(--u) * 60);
+}
+
+/* ---------- Text ---------- */
+
+.eyebrow {
+  font-size: calc(var(--u) * 14);
+  font-weight: 600;
+  color: var(--text-2);
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 6);
+  font-size: calc(var(--u) * 25);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.titleChevron {
+  width: calc(var(--u) * 20);
+  height: calc(var(--u) * 20);
+  color: var(--accent-text);
+}
+.subtitle {
+  margin-top: calc(var(--u) * -6);
+  font-size: calc(var(--u) * 15);
+  color: var(--text-2);
+}
+.month {
+  font-size: calc(var(--u) * 12);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.month span {
+  color: var(--text-3);
+}
+.catLine {
+  font-size: calc(var(--u) * 14);
+  font-weight: 500;
+  color: var(--cat, var(--text-2));
+}
+.link {
+  margin-left: auto;
+  font-size: calc(var(--u) * 15);
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+/* ---------- Header pieces ---------- */
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  --size: 40;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: calc(var(--u, 1px) * var(--size));
+  height: calc(var(--u, 1px) * var(--size));
+  border-radius: calc(var(--u, 1px) * var(--size) * 0.32);
+  font-size: calc(var(--u, 1px) * var(--size) * 0.36);
+  font-weight: 700;
+  background: color-mix(in srgb, var(--tint) 18%, var(--card));
+  color: var(--tint-text);
+  transition: box-shadow var(--dur-ui) var(--ease-out);
+}
+.tint-coral {
+  --tint: var(--accent);
+  --tint-text: var(--accent-text);
+}
+.tint-steel {
+  --tint: var(--steel);
+  --tint-text: var(--steel-text);
+}
+.tint-green {
+  --tint: var(--green);
+  --tint-text: var(--green);
+}
+.tint-amber {
+  --tint: var(--amber);
+  --tint-text: var(--amber);
+}
+.ring {
+  box-shadow:
+    0 0 0 calc(var(--u, 1px) * 2) var(--page),
+    0 0 0 calc(var(--u, 1px) * 4) var(--accent);
+}
+
+.stack {
+  display: flex;
+}
+.stack > * + * {
+  margin-left: calc(var(--u) * -8);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 10);
+  height: calc(var(--u) * 48);
+  padding-inline: calc(var(--u) * 16);
+  border-radius: calc(var(--u) * 14);
+  background: var(--fill-glass);
+  color: var(--text-3);
+  font-size: calc(var(--u) * 16);
+}
+.search svg {
+  width: calc(var(--u) * 18);
+}
+
+.chips {
+  display: flex;
+  gap: calc(var(--u) * 8);
+  flex-wrap: wrap;
+}
+.chip {
+  padding: calc(var(--u) * 8) calc(var(--u) * 14);
+  border-radius: 99px;
+  background: var(--fill-glass);
+  font-size: calc(var(--u) * 15);
+  font-weight: 600;
+  color: var(--text-2);
+}
+.chipOn {
+  background: var(--text);
+  color: var(--page);
+}
+
+/* ---------- Timeline ---------- */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 12);
+}
+.dayGroup {
+  display: flex;
+  gap: calc(var(--u) * 12);
+}
+.rail {
+  flex: none;
+  width: calc(var(--u) * 46);
+  height: calc(var(--u) * 54);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--u) * 14);
+  background: var(--fill-glass);
+}
+.rail b {
+  font-size: calc(var(--u) * 20);
+  line-height: 1;
+  font-weight: 800;
+}
+.rail span {
+  font-size: calc(var(--u) * 12);
+  font-weight: 600;
+  color: var(--text-2);
+}
+.today {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.today span {
+  color: var(--on-accent);
+  opacity: 0.85;
+}
+.dayCards {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 8);
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 12);
+  min-height: calc(var(--u) * 74);
+  padding: calc(var(--u) * 10);
+  border-radius: calc(var(--u) * 18);
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  text-align: left;
+}
+.thumb {
+  position: relative;
+  flex: none;
+  width: calc(var(--u) * 46);
+  height: calc(var(--u) * 54);
+  padding: calc(var(--u) * 8) calc(var(--u) * 7);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 5);
+  border-radius: calc(var(--u) * 8);
+  background: var(--paper);
+}
+.thumb i {
+  height: calc(var(--u) * 3);
+  border-radius: 9px;
+  background: rgb(from var(--paper-ink) r g b / 0.22);
+}
+.thumb i:nth-child(2) {
+  width: 70%;
+}
+.badge {
+  position: absolute;
+  right: calc(var(--u) * -6);
+  bottom: calc(var(--u) * -6);
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 24);
+  height: calc(var(--u) * 24);
+  border-radius: calc(var(--u) * 8);
+  background: var(--cat);
+  color: var(--page);
+  border: calc(var(--u) * 2) solid var(--card);
+}
+.badge svg {
+  width: calc(var(--u) * 13);
+}
+.cardText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 2);
+}
+.cardText b {
+  font-size: calc(var(--u) * 17);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.share {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 40);
+  height: calc(var(--u) * 40);
+  border-radius: 50%;
+  background: var(--fill-glass);
+  color: var(--text-2);
+}
+.share svg {
+  width: calc(var(--u) * 18);
+}
+
+.addBtn {
+  position: absolute;
+  right: calc(var(--u) * 20);
+  bottom: calc(var(--u) * 34);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 8);
+  height: calc(var(--u) * 56);
+  padding-inline: calc(var(--u) * 22);
+  border-radius: 99px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: calc(var(--u) * 17);
+  font-weight: 700;
+  box-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 24) rgb(from var(--accent) r g b / 0.35);
+}
+.addBtn svg {
+  width: calc(var(--u) * 22);
+}
+
+/* ---------- Add flow ---------- */
+
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 12);
+  height: calc(var(--u) * 44);
+  font-size: calc(var(--u) * 17);
+}
+.close {
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 40);
+  height: calc(var(--u) * 40);
+  border-radius: 50%;
+  background: var(--fill-glass);
+  font-size: calc(var(--u) * 15);
+}
+
+.savingFor {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 12);
+  padding: calc(var(--u) * 12) calc(var(--u) * 14);
+  border-radius: calc(var(--u) * 18);
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  font-size: calc(var(--u) * 16);
+}
+
+.tiles {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 10);
+}
+.tile {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 14);
+  min-height: calc(var(--u) * 88);
+  padding: calc(var(--u) * 14);
+  border-radius: calc(var(--u) * 18);
+  background: var(--card);
+  border: 1px solid var(--stroke);
+}
+.tileHot {
+  border: calc(var(--u) * 2) solid var(--accent);
+}
+.tileIcon {
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 52);
+  height: calc(var(--u) * 52);
+  border-radius: calc(var(--u) * 16);
+  background: var(--fill-glass);
+  color: var(--accent-text);
+}
+.tileIcon svg {
+  width: calc(var(--u) * 26);
+}
+.chev {
+  width: calc(var(--u) * 18);
+  color: var(--text-3);
+}
+
+.tips {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 6);
+  padding: calc(var(--u) * 14);
+  border-radius: calc(var(--u) * 18);
+  background: var(--fill-subtle);
+  font-size: calc(var(--u) * 15);
+  color: var(--text-2);
+}
+.tips b {
+  color: var(--text);
+}
+.tips span {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 8);
+}
+.tips svg {
+  width: calc(var(--u) * 16);
+  color: var(--green);
+}
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 12);
+  padding: calc(var(--u) * 12);
+  border-radius: calc(var(--u) * 18);
+  background: var(--card);
+  border: 1px solid var(--stroke);
+}
+.fileThumb {
+  position: relative;
+  width: calc(var(--u) * 44);
+  height: calc(var(--u) * 52);
+}
+.fileThumb i {
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--u) * 8);
+  background: var(--paper);
+  border: 1px solid var(--paper-edge);
+}
+.fileThumb i:first-child {
+  transform: translate(calc(var(--u) * 5), calc(var(--u) * -4)) rotate(5deg);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 10);
+  margin-top: calc(var(--u) * 4);
+  font-size: calc(var(--u) * 17);
+  font-weight: 700;
+}
+.step span {
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 26);
+  height: calc(var(--u) * 26);
+  border-radius: 50%;
+  background: var(--fill-glass);
+  font-size: calc(var(--u) * 14);
+}
+.step em {
+  font-style: normal;
+  font-size: calc(var(--u) * 14);
+  font-weight: 500;
+  color: var(--text-3);
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--u) * 8);
+}
+.choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 4);
+  padding: calc(var(--u) * 12) calc(var(--u) * 10);
+  border-radius: calc(var(--u) * 18);
+  background: var(--card);
+  border: calc(var(--u) * 2) solid var(--stroke);
+  font-size: calc(var(--u) * 15);
+  line-height: 1.2;
+}
+.choice b {
+  font-weight: 700;
+}
+.choice .catLine {
+  font-size: calc(var(--u) * 13);
+  color: var(--text-2);
+}
+.choiceOn {
+  border-color: var(--accent);
+}
+.choiceIcon {
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 36);
+  height: calc(var(--u) * 36);
+  margin-bottom: calc(var(--u) * 4);
+  border-radius: calc(var(--u) * 12);
+  background: color-mix(in srgb, var(--cat) 16%, var(--card));
+  color: var(--cat);
+}
+.choiceIcon svg {
+  width: calc(var(--u) * 20);
+}
+.tick {
+  position: absolute;
+  top: calc(var(--u) * -8);
+  right: calc(var(--u) * -8);
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 24);
+  height: calc(var(--u) * 24);
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.tick svg {
+  width: calc(var(--u) * 14);
+}
+
+.input {
+  height: calc(var(--u) * 54);
+  display: flex;
+  align-items: center;
+  padding-inline: calc(var(--u) * 16);
+  border-radius: calc(var(--u) * 14);
+  background: var(--fill-glass);
+  font-size: calc(var(--u) * 17);
+  font-weight: 500;
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 8);
+  height: calc(var(--u) * 60);
+  margin-top: calc(var(--u) * 6);
+  border-radius: 99px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: calc(var(--u) * 17);
+  font-weight: 700;
+  align-self: stretch;
+}
+.primary svg {
+  width: calc(var(--u) * 20);
+}
+.ghost {
+  font-size: calc(var(--u) * 17);
+  font-weight: 700;
+  color: var(--accent-text);
+}
+
+.bigCheck {
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 84);
+  height: calc(var(--u) * 84);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--green) 18%, var(--page));
+  color: var(--green);
+}
+.bigCheck svg {
+  width: calc(var(--u) * 44);
+}
+.visit {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 8);
+  margin-block: calc(var(--u) * 14) calc(var(--u) * 6);
+  text-align: left;
+}
+
+/* ---------- Show to doctor ---------- */
+
+.summary {
+  gap: calc(var(--u) * 10);
+  background: linear-gradient(180deg, var(--wash-1), var(--page) 40%);
+}
+.sumName {
+  font-size: calc(var(--u) * 32);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.sumMeta {
+  margin-top: calc(var(--u) * -4);
+  font-size: calc(var(--u) * 19);
+  font-weight: 700;
+  color: var(--text-2);
+}
+.pair {
+  display: flex;
+  gap: calc(var(--u) * 10);
+}
+.pair > * {
+  flex: 1;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 4);
+  padding: calc(var(--u) * 14);
+  border-radius: calc(var(--u) * 18);
+  border: calc(var(--u) * 1.5) solid var(--tone);
+  background: var(--card);
+  font-size: calc(var(--u) * 18);
+  line-height: 1.25;
+}
+.box b {
+  font-weight: 700;
+}
+.boxLabel {
+  font-size: calc(var(--u) * 12);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tone);
+}
+.boxDanger {
+  --tone: var(--danger);
+}
+.boxAmber {
+  --tone: var(--amber);
+}
+.boxSteel {
+  --tone: var(--steel-text);
+}
+.boxGreen {
+  --tone: var(--green);
+}
+.boxCoral {
+  --tone: var(--accent-text);
+}
+.huge {
+  font-size: calc(var(--u) * 40);
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--danger);
+}
+.allergy {
+  font-size: calc(var(--u) * 22);
+  color: var(--amber);
+}
+.sumFoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 6);
+  font-size: calc(var(--u) * 13);
+  color: var(--text-3);
+}
+.sumFoot svg {
+  width: calc(var(--u) * 15);
+}
+.close svg {
+  width: calc(var(--u) * 20);
+}

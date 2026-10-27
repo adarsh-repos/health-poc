@@ -1,0 +1,31 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.seg {
+  display: inline-flex;
+  padding: 4px;
+  gap: 2px;
+  border-radius: var(--radius-full);
+  background: var(--fill-glass);
+}
+
+.opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding-inline: 14px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.opt[aria-pressed='true'] {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow-soft);
+}

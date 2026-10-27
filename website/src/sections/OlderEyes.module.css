@@ -1,0 +1,133 @@
+.section {
+  background: var(--card);
+  border-block: 1px solid var(--stroke);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4xl);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.facts {
+  list-style: none;
+  display: grid;
+  gap: 22px;
+  margin-top: 12px;
+}
+.facts li {
+  display: flex;
+  gap: 14px;
+}
+.factIcon {
+  flex: none;
+  margin-top: 3px;
+  color: var(--accent-text);
+}
+.factTitle {
+  font-weight: 700;
+}
+
+/* ---------- E8: live demo ---------- */
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.preview {
+  --s: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(8px * var(--s));
+  padding: 28px;
+  min-height: 300px;
+  justify-content: center;
+  border-radius: var(--radius-xl);
+  background: var(--page);
+  color: var(--text);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow-soft);
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    color var(--dur-ui) var(--ease-out);
+}
+.pEyebrow {
+  font-size: calc(0.875rem * var(--s));
+  font-weight: 700;
+  color: var(--steel-text);
+  letter-spacing: 0.04em;
+}
+.pTitle {
+  font-size: calc(1.6rem * var(--s));
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.pBody {
+  font-size: calc(1.0625rem * var(--s));
+  color: var(--text-2);
+}
+.pButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: calc(10px * var(--s));
+  min-height: calc(56px * var(--s));
+  padding-inline: calc(24px * var(--s));
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: calc(1.0625rem * var(--s));
+  font-weight: 700;
+}
+.pButton svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  padding: 4px;
+  gap: 2px;
+  border-radius: var(--radius-full);
+  background: var(--fill-glass);
+}
+.seg button {
+  min-height: 48px;
+  padding-inline: 18px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.seg button[aria-pressed='true'] {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 6fr 5fr;
+    align-items: center;
+  }
+  .facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}

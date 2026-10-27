@@ -92,7 +92,7 @@ Users choose **System** (the default, follows the phone), **Light** or **Dark** 
 | `brand.coralText` | `#FF9084` | `#C43A2E` | Coral *as text* must reach 4.5:1 on light |
 | `brand.steel` / `steelText` | `#4A7FC9` / `#9FC0E8` | `#3D6FB6` / `#2E5B9A` | Same reason |
 | `brand.green` | `#46C463` | `#23803F` | Used as text ("Verified", "Saved") |
-| `extended.amber` | `#F2B544` | `#9A6700` | Used as text ("Pharmacy bills") |
+| `extended.amber` | `#F2B544` | `#8F5F00` | Used as text ("Pharmacy bills"); 5.06:1 on the page |
 | `text.secondary` / `tertiary` | white 72% / 55% | ink 72% / 62% | Tertiary raised to stay ≥ 4.5:1 on light |
 | `stroke` / `fill.glass` | white 16% / 9% | ink 12% / 6% | |
 | `decor.*` | dark gradients | soft coral / blue gradients, light paper, 12% shadows | Health card, ABHA card, thumbnails, paper stack |
