@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 
+import { MARK } from '@/components/logo.generated';
 import { TOKENS } from '@/lib/tokens.generated';
 
 export const alt = 'Medifyles: all your prescriptions, lab reports and pharmacy bills in one safe place.';
@@ -53,29 +54,11 @@ export default function Image() {
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 26, width: 640 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 34, fontWeight: 800 }}>
-            <div
-              style={{
-                width: 52,
-                height: 52,
-                borderRadius: 17,
-                background: t.accent,
-                color: t['on-accent'],
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <svg width="30" height="30" viewBox="0 0 512 512">
-                <path
-                  d="M416 128L192 384l-96-96"
-                  fill="none"
-                  stroke={t['on-accent']}
-                  strokeWidth="56"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+            <svg width="60" height="60" viewBox={MARK.viewBox} fill="none">
+              <path d={MARK.paper} fill={t['logo-paper']} />
+              <path d={MARK.lines} stroke={t['logo-lines']} strokeWidth="22" strokeLinecap="round" />
+              <path d={MARK.pocket} fill={t['logo-pocket']} />
+            </svg>
             Medifyles
           </div>
           <div style={{ fontSize: 66, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>

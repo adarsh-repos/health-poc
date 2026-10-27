@@ -33,7 +33,10 @@ export const TOKENS = {
     "paper-ink-2": "rgba(27,27,31,0.72)",
     "paper-green": "#23803F",
     "paper-steel": "#2E5B9A",
-    "paper-amber": "#8F5F00"
+    "paper-amber": "#8F5F00",
+    "logo-pocket": "#1E3A75",
+    "logo-paper": "#F5B862",
+    "logo-lines": "#1E3A75"
   },
   "dark": {
     "page": "#090B12",
@@ -67,6 +70,9 @@ export const TOKENS = {
     "paper-ink-2": "rgba(27,27,31,0.72)",
     "paper-green": "#23803F",
     "paper-steel": "#2E5B9A",
-    "paper-amber": "#8F5F00"
+    "paper-amber": "#8F5F00",
+    "logo-pocket": "#FFFFFF",
+    "logo-paper": "#F5B862",
+    "logo-lines": "#1E3A75"
   }
 } as const;

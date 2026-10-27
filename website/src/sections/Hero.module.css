@@ -1,12 +1,12 @@
 .hero {
   padding-top: clamp(24px, 5vw, 64px);
-  padding-bottom: clamp(var(--space-4xl), 8vw, var(--space-5xl));
+  padding-bottom: clamp(32px, 8vw, var(--space-5xl));
   overflow: clip;
 }
 
 .grid {
   display: grid;
-  gap: var(--space-4xl);
+  gap: clamp(32px, 8vw, var(--space-4xl));
 }
 
 .copy {
@@ -61,27 +61,39 @@
 
 /* ---------- Visual: phone + paper stack ---------- */
 
+/*
+ * Phones and tablets: a square frame that scales with the screen (container
+ * units). The phone peeks in from the top right and fades out at the bottom;
+ * the papers sit fully inside on the left. Nothing touches the screen edges.
+ */
 .visual {
+  container-type: inline-size;
   position: relative;
-  display: grid;
-  justify-items: end;
-  padding-bottom: 40px;
-  min-height: 0;
+  width: 100%;
+  max-width: 440px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1;
+  overflow: clip;
 }
 
 .phone {
-  width: min(78%, 330px);
-  transform: rotate(4deg);
-  transform-origin: bottom right;
+  position: absolute;
+  top: 3%;
+  right: 6%;
+  width: 54%;
+  transform: rotate(3deg);
+  transform-origin: top right;
+  /* Show the top of the phone (the records list) and fade the rest out. */
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 74%);
 }
 
 .stack {
   position: absolute;
-  left: 0;
-  bottom: 56px;
-  width: 64%;
-  height: 72%;
-  font-size: clamp(12px, 3.4vw, 17px); /* scales the em-sized papers */
+  left: 7%;
+  bottom: 12%;
+  width: 60%;
+  height: 62%;
+  font-size: 3.05cqw; /* PaperSheet is 13em wide: about 40% of the frame */
 }
 
 .sheet {
@@ -105,7 +117,7 @@
 }
 .sheet[data-pos='2'] {
   z-index: 1;
-  transform: translate(-0.6em, -2em) rotate(-11deg);
+  transform: translate(0.6em, -2em) rotate(-11deg);
   filter: brightness(0.94);
 }
 @media (hover: hover) {
@@ -119,8 +131,9 @@
 
 .dots {
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: 50%;
+  bottom: 3%;
+  translate: -50% 0;
   display: flex;
   gap: 8px;
 }
@@ -161,17 +174,39 @@
   .title {
     font-size: clamp(2.5rem, min(5.2vw, 8.4vh), 4.5rem);
   }
+  /* Back to the free layout: the whole phone, tilted, with papers in front. */
   .visual {
+    container-type: normal;
+    display: grid;
+    justify-items: end;
+    max-width: none;
+    margin: 0;
+    aspect-ratio: auto;
+    overflow: visible;
     padding-bottom: 40px;
   }
   /* The phone is about 2.17× as tall as wide: keep it within the banner's height. */
   .phone {
+    position: static;
     width: min(70%, 330px, calc((var(--hero-h) - 120px) / 2.17));
+    transform: rotate(4deg);
+    transform-origin: bottom right;
+    mask-image: none;
   }
   .stack {
     left: 7%; /* keep the fanned papers clear of the copy column */
-    font-size: clamp(12px, min(1.25vw, 2vh), 17px);
     bottom: 52px;
+    width: 64%;
+    height: 72%;
+    font-size: clamp(12px, min(1.25vw, 2vh), 17px);
+  }
+  .sheet[data-pos='2'] {
+    transform: translate(-0.6em, -2em) rotate(-11deg);
+  }
+  .dots {
+    left: 0;
+    bottom: 0;
+    translate: none;
   }
 }
 

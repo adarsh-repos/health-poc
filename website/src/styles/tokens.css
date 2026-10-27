@@ -46,6 +46,9 @@
   --paper-green: #23803F;
   --paper-steel: #2E5B9A;
   --paper-amber: #8F5F00;
+  --logo-pocket: #1E3A75;
+  --logo-paper: #F5B862;
+  --logo-lines: #1E3A75;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -82,6 +85,9 @@
     --paper-green: #23803F;
     --paper-steel: #2E5B9A;
     --paper-amber: #8F5F00;
+    --logo-pocket: #FFFFFF;
+    --logo-paper: #F5B862;
+    --logo-lines: #1E3A75;
   }
 }
 
@@ -118,6 +124,9 @@
   --paper-green: #23803F;
   --paper-steel: #2E5B9A;
   --paper-amber: #8F5F00;
+  --logo-pocket: #FFFFFF;
+  --logo-paper: #F5B862;
+  --logo-lines: #1E3A75;
 }
 
 :root[data-contrast="more"] {
@@ -180,6 +189,9 @@
   --paper-green: #23803F;
   --paper-steel: #2E5B9A;
   --paper-amber: #8F5F00;
+  --logo-pocket: #1E3A75;
+  --logo-paper: #F5B862;
+  --logo-lines: #1E3A75;
 }
 .theme-dark {
   --page: #090B12;
@@ -214,6 +226,9 @@
   --paper-green: #23803F;
   --paper-steel: #2E5B9A;
   --paper-amber: #8F5F00;
+  --logo-pocket: #FFFFFF;
+  --logo-paper: #F5B862;
+  --logo-lines: #1E3A75;
 }
 .theme-light.contrast-more {
   --text-2: rgba(27,27,31,0.88);
