@@ -230,7 +230,7 @@ The page is read top to bottom like the app's onboarding: **one idea per section
   1. **Take a photo.** *Page by page, or pick a PDF from WhatsApp.* → Add › Source screen
   2. **Say what it is.** *Prescription, lab report or bill. Today, yesterday, or pick a date.* → Add › Details
   3. **It's saved.** *In date order, under the right person. Add another paper from the same visit in one tap.* → Saved screen
-- **Mobile:** the steps stack, each with its own phone image. Nothing is sticky, because small screens can't spare the space.
+- **Mobile:** the steps stack, each with its own phone image, centred under the text at about two-thirds of the screen width (max 280px, never taller than ~70% of the screen). Nothing is sticky, because small screens can't spare the space.
 - The step number uses the app's `StepHeader` style ("Step 2 of 3" with a 4px coral bar) to echo the product.
 - **CTA at the end of the section:** primary `[Get the app]`.
 

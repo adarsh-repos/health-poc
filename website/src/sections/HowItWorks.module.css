@@ -48,9 +48,14 @@
   background: var(--accent);
 }
 
+/*
+ * Phones and tablets: each step's screen sits centred under its text, sized to
+ * the screen (about 2/3 of the width, never taller than ~70% of the viewport).
+ */
 .inlinePhone {
-  width: min(82%, 320px);
-  margin-top: 12px;
+  align-self: center;
+  width: min(68%, 280px, calc(70svh / 2.17));
+  margin-top: 16px;
 }
 
 .cta {
