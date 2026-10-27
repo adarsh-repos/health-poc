@@ -1,5 +1,5 @@
 import { Icon } from '@/components/Icon';
-import { CATEGORY, SUMMARY, type DemoPerson, type DemoRecord, FAMILY } from '@/lib/demo';
+import { CATEGORY, SUMMARY, type Category, type DemoPerson, type DemoRecord, FAMILY } from '@/lib/demo';
 import s from './phone.module.css';
 
 /*
@@ -18,16 +18,35 @@ export function Avatar({ person, ring = false, size = 40 }: { person: DemoPerson
   );
 }
 
-function groupByDay(records: DemoRecord[]) {
-  const days = new Map<number, DemoRecord[]>();
-  for (const r of records) days.set(r.day, [...(days.get(r.day) ?? []), r]);
-  return [...days.entries()];
+const MONTHS: Record<string, string> = { Oct: 'October 2026', Sep: 'September 2026' };
+
+/** Month → day → records, newest first, as the app's timeline groups them. */
+function groupByMonthAndDay(records: DemoRecord[]) {
+  const months = new Map<string, Map<number, DemoRecord[]>>();
+  for (const r of records) {
+    const days = months.get(r.month) ?? new Map<number, DemoRecord[]>();
+    days.set(r.day, [...(days.get(r.day) ?? []), r]);
+    months.set(r.month, days);
+  }
+  return [...months.entries()].map(([month, days]) => ({ month, days: [...days.entries()] }));
 }
 
-/** Records tab: the person header, filter chips and the dated timeline. */
-export function RecordsScreen({ person }: { person: DemoPerson }) {
+const CHIPS: { id: Category | 'all'; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'prescription', label: 'Prescriptions' },
+  { id: 'lab', label: 'Reports' },
+  { id: 'bill', label: 'Bills' },
+];
+
+/**
+ * Records tab: the person header, filter chips and the dated timeline.
+ * `filter` mirrors the app's chips; changing it re-runs the cards' entrance.
+ */
+export function RecordsScreen({ person, filter = 'all' }: { person: DemoPerson; filter?: Category | 'all' }) {
   const isSelf = person.relation === 'You';
   const latest = person.records[0];
+  const shown = filter === 'all' ? person.records : person.records.filter((r) => r.category === filter);
+  let n = 0; // stagger index across the whole list
   return (
     <div className={s.page}>
       <p className={s.eyebrow}>{isSelf ? 'Good morning, Rajesh' : `${person.relation} · ${person.age} years`}</p>
@@ -51,27 +70,33 @@ export function RecordsScreen({ person }: { person: DemoPerson }) {
         Search records
       </div>
       <div className={s.chips}>
-        <span className={`${s.chip} ${s.chipOn}`}>All</span>
-        <span className={s.chip}>Prescriptions</span>
-        <span className={s.chip}>Reports</span>
-        <span className={s.chip}>Bills</span>
+        {CHIPS.map((c) => (
+          <span key={c.id} className={`${s.chip} ${c.id === filter ? s.chipOn : ''}`}>
+            {c.label}
+          </span>
+        ))}
       </div>
 
-      <p className={s.month}>
-        October 2026 <span>· {person.records.length}</span>
-      </p>
-      <div className={s.timeline}>
-        {groupByDay(person.records).map(([day, recs], i) => (
-          <div key={day} className={s.dayGroup}>
-            <div className={`${s.rail} ${i === 0 && isSelf ? s.today : ''}`}>
-              <b>{day}</b>
-              <span>{recs[0].weekday}</span>
-            </div>
-            <div className={s.dayCards}>
-              {recs.map((r) => (
-                <RecordCard key={r.title} record={r} />
-              ))}
-            </div>
+      <div key={filter} className={s.timeline}>
+        {groupByMonthAndDay(shown).map(({ month, days }) => (
+          <div key={month} className={s.monthGroup}>
+            <p className={s.month}>
+              {MONTHS[month] ?? month}{' '}
+              <span>· {days.reduce((sum, [, recs]) => sum + recs.length, 0)}</span>
+            </p>
+            {days.map(([day, recs]) => (
+              <div key={day} className={s.dayGroup}>
+                <div className={`${s.rail} ${isSelf && month === latest.month && day === latest.day ? s.today : ''}`}>
+                  <b>{day}</b>
+                  <span>{recs[0].weekday}</span>
+                </div>
+                <div className={s.dayCards}>
+                  {recs.map((r) => (
+                    <RecordCard key={r.title} record={r} index={n++} />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -84,14 +109,17 @@ export function RecordsScreen({ person }: { person: DemoPerson }) {
   );
 }
 
-function RecordCard({ record }: { record: DemoRecord }) {
+function RecordCard({ record, index = 0 }: { record: DemoRecord; index?: number }) {
   const cat = CATEGORY[record.category];
   return (
-    <div className={`${s.card} cat-${record.category}`}>
+    <div className={`${s.card} cat-${record.category}`} style={{ '--i': index } as React.CSSProperties}>
+      {/* A tiny real paper: letterhead, category rule, text lines, stamp. */}
       <span className={s.thumb}>
+        <b />
         <i />
         <i />
         <i />
+        <em />
         <span className={s.badge}>
           <Icon name={cat.icon} />
         </span>

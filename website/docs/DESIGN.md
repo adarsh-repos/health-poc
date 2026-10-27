@@ -167,6 +167,7 @@ People read the web from further away than a phone, and our readers are 55+. **T
 ### 4.5 Iconography and imagery
 
 - **Icons are Ionicons**, the set the app uses, so the site and app match. They always appear with a word, never alone (app principle 4).
+- **The device is realistic** (2026-10-28): metal edge (theme-aware titanium), black bezel, side buttons, Dynamic Island, real status icons and a home bar. Record thumbnails are tiny papers (letterhead, category rule, lines, stamp), not grey skeleton blocks.
 - **Product shots are faithful HTML rebuilds of real app screens** (Records timeline, Add › Source, Details, Saved, Show to doctor, Family) using the same tokens and the same copy, inside a plain device frame. They stay crisp, follow the site's theme, and can animate (E4–E6). Never show a screen or feature that isn't in the app.
 - **Papers are illustrated, not photographed.** They're vector or SVG with fake letterheads ("Dr. S. K. Mehta, MBBS"), stamps and folds, and **never contain real patient data**.
 - People photography, if any, shows real Indian 55+ faces in natural light, never stock "doctor with stethoscope smiling at tablet". Optional and decided in §12.
@@ -331,6 +332,8 @@ After the hero scrolls away on phones, a **bottom bar** (72h, safe-area aware) s
 | E8 | **Live text-size demo** | S7 | User drags the slider | Same (it's user-driven) |
 | E9 | **Section entrance** fade + 16px rise | All sections | Enters view, once | None (appears instantly) |
 | E10 | **Press** scale 0.98 and a lighter fill | All buttons and cards | `:active` | Colour change only |
+| E11 | **Phone follows the headline** (filter chip switches, list re-filters, cards slide in 70ms apart) | Hero | Same cycle as E1, pauses with it | Static list on the first filter |
+| E12 | **Phone rises in** (fade + 48px rise, 900ms) | Hero | Page load, once | Appears in place |
 
 **Never:** parallax backgrounds, cursor-follower blobs, magnetic buttons, text scramble or typewriter effects, marquees, auto-playing video with sound, scroll hijacking or smooth-scroll libraries, confetti, or hover effects that hide information. Nothing loops forever except E1, which can be paused.
 

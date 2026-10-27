@@ -99,7 +99,8 @@ export function Hero() {
             className={styles.phone}
             label="The Medifyles Records screen: papers listed by date for Rajesh, with his wife and mother one tap away."
           >
-            <RecordsScreen person={FAMILY[0]} />
+            {/* The phone's filter follows the headline word, like tapping the app's chips. */}
+            <RecordsScreen person={FAMILY[0]} filter={story.category} />
           </PhoneFrame>
 
           <div className={styles.stack} role="group" aria-label="Kinds of paper Medifyles keeps">

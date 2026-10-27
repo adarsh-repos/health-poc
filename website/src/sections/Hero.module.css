@@ -85,6 +85,15 @@
   transform-origin: top right;
   /* Show the top of the phone (the records list) and fade the rest out. */
   mask-image: linear-gradient(to bottom, #000 58%, transparent 74%);
+  /* Rises into place once, on load (\`translate\` composes with the tilt). */
+  animation: phoneIn 900ms var(--ease-out) 150ms both;
+}
+
+@keyframes phoneIn {
+  from {
+    opacity: 0;
+    translate: 0 48px;
+  }
 }
 
 .stack {
@@ -164,9 +173,9 @@
     padding-block: clamp(16px, 3.5vh, 40px);
   }
   .grid {
-    grid-template-columns: 11fr 10fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 48px;
+    gap: 40px;
   }
   .copy {
     gap: clamp(12px, 2.2vh, 22px);
@@ -188,7 +197,7 @@
   /* The phone is about 2.17× as tall as wide: keep it within the banner's height. */
   .phone {
     position: static;
-    width: min(70%, 330px, calc((var(--hero-h) - 120px) / 2.17));
+    width: min(78%, 390px, calc((var(--hero-h) - 96px) / 2.12));
     transform: rotate(4deg);
     transform-origin: bottom right;
     mask-image: none;
@@ -198,7 +207,7 @@
     bottom: 52px;
     width: 64%;
     height: 72%;
-    font-size: clamp(12px, min(1.25vw, 2vh), 17px);
+    font-size: clamp(13px, min(1.45vw, 2.35vh), 20px);
   }
   .sheet[data-pos='2'] {
     transform: translate(-0.6em, -2em) rotate(-11deg);

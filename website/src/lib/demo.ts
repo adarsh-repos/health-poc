@@ -46,6 +46,9 @@ export const FAMILY: DemoPerson[] = [
       { title: 'BP medicines', category: 'prescription', day: 21, weekday: 'Wed', month: 'Oct' },
       { title: 'Shree Medicals', category: 'bill', day: 14, weekday: 'Wed', month: 'Oct' },
       { title: 'Eye check-up', category: 'prescription', day: 2, weekday: 'Fri', month: 'Oct' },
+      { title: 'Cholesterol (lipid profile)', category: 'lab', day: 28, weekday: 'Mon', month: 'Sep' },
+      { title: 'Fever and cough', category: 'prescription', day: 24, weekday: 'Thu', month: 'Sep' },
+      { title: 'Sai Medical Hall', category: 'bill', day: 24, weekday: 'Thu', month: 'Sep' },
     ],
   },
   {
