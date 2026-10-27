@@ -55,7 +55,8 @@ export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
       <div className={`container ${styles.grid}`}>
-        <div className={styles.copy}>
+        {/* Phones: head → picture → form, so all three show before any scrolling. */}
+        <div className={styles.head}>
           <p className="overline">For you and your family</p>
           <h1 id="hero-title" className={`display ${styles.title}`}>
             <span className="visually-hidden">
@@ -79,19 +80,6 @@ export function Hero() {
             Take a photo of any medical paper. Medifyles keeps it safe, in date order, for every person in your
             family.
           </p>
-          <EarlyListForm id="hero-join" source="hero" />
-          <ul className={styles.facts} aria-label="At a glance">
-            {FACTS.map((f) => (
-              <li key={f.text} style={{ '--tone': f.tone } as React.CSSProperties}>
-                <Icon name={f.icon} size={18} className={styles.factIcon} />
-                {f.text}
-              </li>
-            ))}
-          </ul>
-          <a href="#how" className={`btn btn-ghost ${styles.more}`}>
-            See how it works
-            <Icon name="arrow-down" />
-          </a>
         </div>
 
         <div className={styles.visual}>
@@ -126,6 +114,22 @@ export function Hero() {
               <span key={s.category} className={i === index ? styles.dotOn : ''} />
             ))}
           </div>
+        </div>
+
+        <div className={styles.action}>
+          <EarlyListForm id="hero-join" source="hero" compact />
+          <ul className={styles.facts} aria-label="At a glance">
+            {FACTS.map((f) => (
+              <li key={f.text} style={{ '--tone': f.tone } as React.CSSProperties}>
+                <Icon name={f.icon} size={18} className={styles.factIcon} />
+                {f.text}
+              </li>
+            ))}
+          </ul>
+          <a href="#how" className={`btn btn-ghost ${styles.more}`}>
+            See how it works
+            <Icon name="arrow-down" />
+          </a>
         </div>
       </div>
     </section>

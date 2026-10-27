@@ -1,19 +1,35 @@
 .hero {
-  padding-top: clamp(24px, 5vw, 64px);
+  padding-top: clamp(16px, 2.6svh, 64px);
   padding-bottom: clamp(32px, 8vw, var(--space-5xl));
   overflow: clip;
 }
 
+/*
+ * Phones (DESIGN §6 S2): head → picture → form, sized by the screen height so
+ * the headline, the product and the "Join" button all show before scrolling.
+ * The facts and "See how it works" sit just below the fold.
+ */
 .grid {
   display: grid;
-  gap: clamp(32px, 8vw, var(--space-4xl));
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'head' 'visual' 'action';
+  row-gap: clamp(12px, 1.8svh, 20px);
 }
 
-.copy {
+.head {
+  grid-area: head;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 22px;
+  gap: clamp(8px, 1.4svh, 16px);
+}
+
+.action {
+  grid-area: action;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
 }
 
 .title {
@@ -62,17 +78,19 @@
 /* ---------- Visual: phone + paper stack ---------- */
 
 /*
- * Phones and tablets: a square frame that scales with the screen (container
- * units). The phone peeks in from the top right and fades out at the bottom;
- * the papers sit fully inside on the left. Nothing touches the screen edges.
+ * Phones and tablets: a short frame (about a third of the screen height) that
+ * scales with both width and height (container units). The phone peeks in from
+ * the top right and fades out at the bottom; the papers sit fully inside on
+ * the left. Nothing touches the screen edges.
  */
 .visual {
-  container-type: inline-size;
+  grid-area: visual;
+  container-type: size;
   position: relative;
   width: 100%;
   max-width: 440px;
+  height: clamp(220px, 33svh, 340px);
   margin-inline: auto;
-  aspect-ratio: 1 / 1;
   overflow: clip;
 }
 
@@ -80,7 +98,8 @@
   position: absolute;
   top: 3%;
   right: 6%;
-  width: 54%;
+  /* Wide enough to read, short enough that the fade lands inside the frame. */
+  width: min(54cqw, 64cqh);
   transform: rotate(3deg);
   transform-origin: top right;
   /* Show the top of the phone (the records list) and fade the rest out. */
@@ -101,8 +120,9 @@
   left: 7%;
   bottom: 12%;
   width: 60%;
-  height: 62%;
-  font-size: 3.05cqw; /* PaperSheet is 13em wide: about 40% of the frame */
+  height: 70%;
+  /* PaperSheet is 13em × 17em: about 40% of the width, 62% of the height. */
+  font-size: min(3.05cqw, 3.6cqh);
 }
 
 .sheet {
@@ -172,12 +192,21 @@
     align-items: center;
     padding-block: clamp(16px, 3.5vh, 40px);
   }
+  /* Text on the left (head above action), the picture spanning the right. */
   .grid {
     grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'head visual' 'action visual';
+    grid-template-rows: auto auto;
+    column-gap: 40px;
+    row-gap: clamp(12px, 2.2vh, 22px);
     align-items: center;
-    gap: 40px;
   }
-  .copy {
+  .head {
+    align-self: end;
+    gap: clamp(12px, 2.2vh, 22px);
+  }
+  .action {
+    align-self: start;
     gap: clamp(12px, 2.2vh, 22px);
   }
   .title {
@@ -189,8 +218,8 @@
     display: grid;
     justify-items: end;
     max-width: none;
+    height: auto;
     margin: 0;
-    aspect-ratio: auto;
     overflow: visible;
     padding-bottom: 40px;
   }

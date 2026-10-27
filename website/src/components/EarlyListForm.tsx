@@ -13,9 +13,18 @@ const INITIAL: JoinState = { status: 'idle' };
  * The site's one form (DESIGN §7.2): a 10-digit mobile number, like the app's
  * phone step. Used in the hero (id "hero-join") and the closing section (id "join").
  */
-export function EarlyListForm({ id, source }: { id: string; source: 'hero' | 'closing' | 'families' }) {
+export function EarlyListForm({
+  id,
+  source,
+  compact = false,
+}: {
+  id: string;
+  source: 'hero' | 'closing' | 'families';
+  /** Phones: field and a short "Join" button share one row (the hero, above the fold). */
+  compact?: boolean;
+}) {
   return (
-    <div id={id} data-primary-cta={source} className={styles.wrap}>
+    <div id={id} data-primary-cta={source} className={`${styles.wrap} ${compact ? styles.compact : ''}`}>
       <JoinForm id={id} source={source} />
     </div>
   );
@@ -73,9 +82,21 @@ function JoinForm({ id, source }: { id: string; source: string }) {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary" disabled={pending}>
-          {pending ? 'Adding you…' : 'Join the early list'}
-          {!pending && <Icon name="arrow-forward" />}
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={pending}
+          aria-label={pending ? 'Adding you…' : 'Join the early list'}
+        >
+          {pending ? (
+            'Adding you…'
+          ) : (
+            <>
+              <span className={styles.long}>Join the early list</span>
+              <span className={styles.short}>Join</span>
+              <Icon name="arrow-forward" />
+            </>
+          )}
         </button>
       </div>
       <input type="hidden" name="source" value={source} />

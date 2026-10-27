@@ -215,7 +215,7 @@ The page is read top to bottom like the app's onboarding: **one idea per section
   - **Secondary (ghost):** `See how it works ↓`
   - Fact pills: 🔒 Private · ⏱ 2 min to set up · 🪪 Aadhaar ready (Ionicons, not emoji)
 - **Right column (7):** the **paper stack**, the same fanned cards as the app's welcome screen. The top card matches the rotating word. Clicking a card selects it and pauses the cycle for 8s (app rule). Behind the stack sits the real app's Records screen in a phone frame, tilted 4°.
-- **Mobile:** text first, then the visual in a square frame (at most 440px wide) that scales with the screen. The phone peeks in from the top right and fades out at the bottom; the papers sit fully inside on the left. Nothing touches the screen edges. The CTA must be visible without scrolling on a 360×740 screen.
+- **Mobile (above the fold, no scrolling):** overline, headline and one paragraph → the picture in a short frame (about ⅓ of the screen height: the phone peeks in and fades out, papers in front) → the form on **one row** (number field + a short **"Join →"** button; screen readers still hear "Join the early list"). Measured: the Join button's bottom edge sits at 681px on a 360×740 screen, 725px on 390×844 and 762px on 430×932. The facts and "See how it works" start just below the fold. Built with grid areas (`head` / `visual` / `action`); desktop puts head and action on the left with the picture spanning the right.
 
 ### S3 · The problem: "the bag" (scroll-linked)
 - Overline: `SOUND FAMILIAR?`
