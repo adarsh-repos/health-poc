@@ -110,10 +110,60 @@
 
 .visual {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.visual :global(.btn[disabled]) {
+  opacity: 1;
+  color: var(--text-2);
+  cursor: default;
+}
+
+/* The member added by the walkthrough pops in, then a saffron ring pulses twice. */
+.personNew {
+  animation:
+    popIn 520ms var(--spring) both,
+    newRing 1100ms var(--ease-out) 450ms 2;
+}
+@keyframes newRing {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(from var(--logo-word-2) r g b / 0);
+  }
+  40% {
+    box-shadow: 0 0 0 6px rgb(from var(--logo-word-2) r g b / 0.4);
+  }
+}
+
+/* "Just added": a light shimmer passes over the tag twice. */
+.pillNew {
+  background: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgb(from var(--logo-word-2) r g b / 0.35) 50%,
+      transparent 70%
+    )
+    var(--fill-glass);
+  background-size: 250% 100%;
+  animation: shimmer 1400ms var(--ease-out) 300ms 2 both;
+}
+@keyframes shimmer {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -20% 0;
+  }
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
 }
 .phone {
-  width: min(84%, 340px);
+  width: min(80%, 320px); /* same size as the clinic phone */
 }
 .swap {
   position: absolute;

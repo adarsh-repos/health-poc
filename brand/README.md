@@ -24,12 +24,19 @@ directions explored, small sizes, lockups, dark mode, the phone home screen, and
 **Never edit these by hand.** Change the geometry or colours in `build.mjs`, then run `node brand/build.mjs` from the repo root.
 It uses `sharp` from `website/node_modules`, so run `npm install` in `website/` first.
 
+## Wordmark
+
+**"Medi"** in the pocket colour (navy, or white on dark) and **"fyles"** in saffron: it reads as *medi + files*.
+The dot of the **i** is a small **tilted saffron paper**, echoing the paper in the mark. That one detail makes the wordmark ownable.
+The text is a dotless ı in Figtree ExtraBold, and the dot is drawn separately (`DOT` in `build.mjs`, measured in the browser).
+
 ## Colours
 
 The app's Navy & Saffron theme (`src/theme/palette.ts`, `ACCENTS.navy`):
 
 - **Navy** `#1E3A75`: the pocket on light backgrounds, and the app icon background
-- **Saffron** `#F5B862`: the paper
+- **Saffron** `#F5B862`: the paper, and "fyles" on dark backgrounds
+- **Deep saffron** `#A86B0E`: "fyles" and the i-dot on light backgrounds (4.04:1 on the page)
 - On dark backgrounds the pocket is **white**
 
 ## Rules

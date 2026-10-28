@@ -42,7 +42,16 @@ const CHIPS: { id: Category | 'all'; label: string }[] = [
  * Records tab: the person header, filter chips and the dated timeline.
  * `filter` mirrors the app's chips; changing it re-runs the cards' entrance.
  */
-export function RecordsScreen({ person, filter = 'all' }: { person: DemoPerson; filter?: Category | 'all' }) {
+export function RecordsScreen({
+  person,
+  filter = 'all',
+  family = FAMILY,
+}: {
+  person: DemoPerson;
+  filter?: Category | 'all';
+  /** Everyone in the header's avatar stack (grows when a member is added). */
+  family?: DemoPerson[];
+}) {
   const isSelf = person.relation === 'You';
   const latest = person.records[0];
   const shown = filter === 'all' ? person.records : person.records.filter((r) => r.category === filter);
@@ -56,13 +65,13 @@ export function RecordsScreen({ person, filter = 'all' }: { person: DemoPerson; 
           <Icon name="chevron-down" className={s.titleChevron} />
         </p>
         <span className={s.stack}>
-          {FAMILY.map((p) => (
+          {family.map((p) => (
             <Avatar key={p.id} person={p} ring={p.id === person.id} size={32} />
           ))}
         </span>
       </div>
       <p className={s.subtitle}>
-        {person.records.length} records · last added {latest.day} {latest.month}
+        {person.records.length} record{person.records.length === 1 ? '' : 's'} · last added {latest.day} {latest.month}
       </p>
 
       <div className={s.search}>
@@ -261,33 +270,41 @@ export function SummaryScreen() {
   return (
     <div className={`${s.page} ${s.summary}`}>
       <TopClose title="Health summary" />
-      <p className={s.sumName}>{SUMMARY.name}</p>
-      <p className={s.sumMeta}>{SUMMARY.meta}</p>
+      <p className={s.sumName} data-sum style={{ '--i': 0 } as React.CSSProperties}>
+        {SUMMARY.name}
+      </p>
+      <p className={s.sumMeta} data-sum style={{ '--i': 1 } as React.CSSProperties}>
+        {SUMMARY.meta}
+      </p>
       <div className={s.pair}>
-        <div className={`${s.box} ${s.boxDanger}`}>
+        <div className={`${s.box} ${s.boxDanger}`} data-sum style={{ '--i': 2 } as React.CSSProperties}>
           <span className={s.boxLabel}>Blood group</span>
           <b className={s.huge}>{SUMMARY.blood}</b>
         </div>
-        <div className={`${s.box} ${s.boxAmber}`} style={{ flex: 2 }}>
+        <div
+          className={`${s.box} ${s.boxAmber}`}
+          data-sum="allergy"
+          style={{ flex: 2, '--i': 3 } as React.CSSProperties}
+        >
           <span className={s.boxLabel}>Allergies</span>
           <b className={s.allergy}>{SUMMARY.allergies}</b>
         </div>
       </div>
-      <div className={`${s.box} ${s.boxSteel}`}>
+      <div className={`${s.box} ${s.boxSteel}`} data-sum style={{ '--i': 4 } as React.CSSProperties}>
         <span className={s.boxLabel}>Health conditions</span>
         <b>{SUMMARY.conditions.join(' · ')}</b>
       </div>
-      <div className={`${s.box} ${s.boxGreen}`}>
+      <div className={`${s.box} ${s.boxGreen}`} data-sum style={{ '--i': 5 } as React.CSSProperties}>
         <span className={s.boxLabel}>Regular medicines</span>
         <b>{SUMMARY.medicines.join(' · ')}</b>
       </div>
       <div className={s.pair}>
-        <div className={`${s.box} ${s.boxCoral}`}>
+        <div className={`${s.box} ${s.boxCoral}`} data-sum style={{ '--i': 6 } as React.CSSProperties}>
           <span className={s.boxLabel}>Doctor</span>
           <b>{SUMMARY.doctor.name}</b>
           <span className={s.catLine}>{SUMMARY.doctor.place}</span>
         </div>
-        <div className={`${s.box} ${s.boxDanger}`}>
+        <div className={`${s.box} ${s.boxDanger}`} data-sum style={{ '--i': 7 } as React.CSSProperties}>
           <span className={s.boxLabel}>Emergency contact</span>
           <b>{SUMMARY.emergency.name}</b>
         </div>

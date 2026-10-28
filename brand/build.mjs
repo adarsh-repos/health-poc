@@ -14,6 +14,8 @@ const sharp = createRequire(join(here, '../website/package.json'))('sharp');
 /* Colours: the app's Navy & Saffron theme (src/theme/palette.ts, ACCENTS.navy). */
 const NAVY = '#1E3A75';
 const SAFFRON = '#F5B862';
+/** Saffron for text on light backgrounds ("fyles", the i-dot): 4.04:1 on the page. */
+const SAFFRON_DEEP = '#A86B0E';
 const PAGE = '#F7F5F0';
 const INK_DARK = '#090B12';
 
@@ -66,20 +68,25 @@ const adaptiveFg = svg(
   `<g transform="translate(256 248) scale(1)">${mark(DARK)}</g>`,
 );
 
-/* Wordmark lockup: Figtree ExtraBold (the website's font), live text. */
-const lockup = (colors, wordColor) =>
+/*
+ * Wordmark: Figtree ExtraBold. "Medi" in the pocket colour, "fyles" in saffron,
+ * and the i's dot drawn as a small tilted paper (DOT, measured in the browser
+ * against Figtree 800 at this size; re-measure if the font or size changes).
+ */
+const DOT = { x: 1139, y: 126, w: 60, h: 64 };
+const lockup = (colors, word1, word2) =>
   svg(
-    // Cropped to the artwork: mark from x=64, wordmark measured to end at x≈1873 (Figtree 800).
+    // Cropped to the artwork: mark from x=64, wordmark ends at x≈1873.
     '40 56 1860 400',
-    `${mark(colors)}<text x="548" y="372" font-family="Figtree, sans-serif" font-weight="800" font-size="300" letter-spacing="-6" fill="${wordColor}">Medifyles</text>`,
+    `${mark(colors)}<text x="548" y="372" font-family="Figtree, sans-serif" font-weight="800" font-size="300" letter-spacing="-7.5"><tspan fill="${word1}">Medı</tspan><tspan fill="${word2}">fyles</tspan></text><rect x="${DOT.x}" y="${DOT.y}" width="${DOT.w}" height="${DOT.h}" rx="15" fill="${word2}" transform="rotate(-12 ${DOT.x + DOT.w / 2} ${DOT.y + DOT.h / 2})"/>`,
   );
 
 const files = {
   'logo-mark.svg': svg('0 0 512 512', mark(LIGHT)),
   'logo-mark-on-dark.svg': svg('0 0 512 512', mark(DARK)),
   'logo-mark-mono.svg': svg('0 0 512 512', monoMark()),
-  'logo-lockup.svg': lockup(LIGHT, NAVY),
-  'logo-lockup-on-dark.svg': lockup(DARK, '#FFFFFF'),
+  'logo-lockup.svg': lockup(LIGHT, NAVY, SAFFRON_DEEP),
+  'logo-lockup-on-dark.svg': lockup(DARK, '#FFFFFF', SAFFRON),
   'app-icon.svg': appIcon(),
   'favicon.svg': favicon,
   'android-adaptive-foreground.svg': adaptiveFg,
@@ -87,7 +94,17 @@ const files = {
 
 mkdirSync(join(here, 'png'), { recursive: true });
 // Raw geometry for code that draws the mark itself (the website's Logo component).
-writeFileSync(join(here, 'mark.json'), JSON.stringify({ viewBox: '0 0 512 512', paper: PAPER, pocket: POCKET, lines: LINES }, null, 2) + '\n');
+writeFileSync(join(here, 'mark.json'), JSON.stringify(
+    {
+      viewBox: '0 0 512 512',
+      paper: PAPER,
+      pocket: POCKET,
+      lines: LINES,
+      colors: { navy: NAVY, saffron: SAFFRON, saffronDeep: SAFFRON_DEEP },
+    },
+    null,
+    2,
+  ) + '\n');
 for (const [name, body] of Object.entries(files)) writeFileSync(join(here, name), body);
 
 const png = (body, size, name) => sharp(Buffer.from(body)).resize(size, size).png().toFile(join(here, 'png', name));
@@ -118,7 +135,7 @@ const tile = (body, bg, size) =>
 
 const board = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Medifyles logo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;800&subset=latin-ext&display=swap" rel="stylesheet">
 <style>
 :root{--navy:${NAVY};--saffron:${SAFFRON};--page:${PAGE};--ink:${INK_DARK}}
 *{box-sizing:border-box;margin:0}body{font-family:Figtree,system-ui,sans-serif;background:var(--page);color:#1B1B1F;padding:48px 20px 96px}

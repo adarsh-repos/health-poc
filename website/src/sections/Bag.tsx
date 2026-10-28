@@ -54,34 +54,52 @@ export function Bag() {
     sec.dataset.animated = 'true';
 
     const papers = [...stg.querySelectorAll<HTMLElement>('[data-paper]')];
-    let w = 0;
-    let h = 0;
+    // Each paper's offset from its sorted spot back into the bag, measured once
+    // (and on resize), never during scrolling, so frames don't force layout.
+    let offsets: { dx: number; dy: number }[] = [];
+    let target = 0; // where the scroll says we should be (0 = in the bag, 1 = sorted)
+    let current = 0; // where the papers are drawn; glides toward target each frame
     let frame = 0;
 
-    const measure = () => {
-      w = stg.clientWidth;
-      h = stg.clientHeight;
-      update();
+    const progressFromScroll = () => {
+      const travel = sec.offsetHeight - window.innerHeight;
+      return clamp01(-sec.getBoundingClientRect().top / Math.max(travel, 1));
     };
 
-    const update = () => {
-      frame = 0;
-      const rect = sec.getBoundingClientRect();
-      const travel = sec.offsetHeight - window.innerHeight;
-      const p = clamp01(-rect.top / Math.max(travel, 1));
+    const draw = (p: number) => {
       papers.forEach((el, i) => {
-        const d = PAPERS[i];
         const t = easeOut(clamp01((p - 0.1 - i * 0.025) / 0.5));
-        const dx = (d.x / 100) * w - el.offsetLeft;
-        const dy = (d.y / 100) * h - el.offsetTop;
-        el.style.transform = `translate(${dx * (1 - t)}px, ${dy * (1 - t)}px) rotate(${d.r * (1 - t)}deg)`;
-        el.style.setProperty('--t', String(t));
+        const { dx, dy } = offsets[i];
+        el.style.transform = `translate3d(${dx * (1 - t)}px, ${dy * (1 - t)}px, 0) rotate(${PAPERS[i].r * (1 - t)}deg)`;
+        el.style.setProperty('--t', t.toFixed(3));
       });
-      sec.style.setProperty('--p', String(p));
+      sec.style.setProperty('--p', p.toFixed(3));
+    };
+
+    const tick = () => {
+      // Glide 18% of the remaining distance per frame: smooth on wheels and trackpads alike.
+      current += (target - current) * 0.18;
+      if (Math.abs(target - current) < 0.0005) current = target;
+      draw(current);
+      frame = current === target ? 0 : requestAnimationFrame(tick);
     };
 
     const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
+      target = progressFromScroll();
+      if (!frame) frame = requestAnimationFrame(tick);
+    };
+
+    const measure = () => {
+      const w = stg.clientWidth;
+      const h = stg.clientHeight;
+      // Clear transforms so offsetLeft/Top give the sorted positions.
+      papers.forEach((el) => (el.style.transform = ''));
+      offsets = papers.map((el, i) => ({
+        dx: (PAPERS[i].x / 100) * w - el.offsetLeft,
+        dy: (PAPERS[i].y / 100) * h - el.offsetTop,
+      }));
+      target = current = progressFromScroll();
+      draw(current);
     };
 
     const ro = new ResizeObserver(measure);

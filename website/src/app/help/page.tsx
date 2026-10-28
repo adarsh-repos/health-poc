@@ -15,14 +15,14 @@ export default function Help() {
     <TextPage
       eyebrow="Help"
       title="Questions people ask"
-      intro="Short answers, in plain words. If something isn't here, ask your family to send us a message."
+      intro="Short answers, in plain words. If something isn't here, call or write to us. A real person will help."
     >
       <Faq />
-      {SITE.supportPhone && (
-        <p>
-          Still need help? Call us on <a href={`tel:${SITE.supportPhone}`}>{SITE.supportPhone}</a>.
-        </p>
-      )}
+      <h2>Still need help?</h2>
+      <p>
+        Call us on <a href={`tel:${SITE.supportPhoneHref}`}>{SITE.supportPhone}</a> or write to{' '}
+        <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.
+      </p>
     </TextPage>
   );
 }

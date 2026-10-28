@@ -39,7 +39,9 @@ export function ShowToDoctor() {
 
         <div className={styles.visual} data-inview>
           <div className={styles.turn}>
-            <PhoneFrame label="Show to doctor: Kamla Devi's health summary with blood group B+ and her allergies to Penicillin and Sulpha drugs at the top.">
+            <PhoneFrame
+              compact
+              label="Show to doctor: Kamla Devi's health summary with blood group B+ and her allergies to Penicillin and Sulpha drugs at the top.">
               <SummaryScreen />
             </PhoneFrame>
           </div>

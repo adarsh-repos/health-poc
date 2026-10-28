@@ -68,6 +68,10 @@
   line-height: 1.35;
 }
 
+.compact .screen {
+  aspect-ratio: 390 / 720;
+}
+
 .status {
   position: relative;
   z-index: 2;

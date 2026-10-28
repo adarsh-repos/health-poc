@@ -54,7 +54,7 @@
 
 /* E5: turns from facing the user to facing the viewer, the way the phone is handed over. */
 .turn {
-  width: min(84%, 340px);
+  width: min(80%, 320px); /* same size as the Family phone */
   transform: rotateY(-22deg) rotateX(6deg) scale(0.94);
   transform-origin: 70% 50%;
   transition: transform 1000ms var(--ease-out);
@@ -64,6 +64,40 @@
 }
 html:not(:global(.js)) .turn {
   transform: none;
+}
+
+/*
+ * The summary builds up as the phone turns: name, then blood group, allergies,
+ * conditions, medicines, doctor, emergency contact (75ms apart). Then the
+ * allergies box glows twice: it's what a doctor must see first.
+ */
+html:global(.js) .visual:not(:global(.is-in)) :global([data-sum]) {
+  opacity: 0;
+}
+:global(.is-in) :global([data-sum]) {
+  animation: sumIn 520ms var(--spring) both;
+  animation-delay: calc(450ms + var(--i, 0) * 75ms);
+}
+:global(.is-in) :global([data-sum='allergy']) {
+  animation:
+    sumIn 520ms var(--spring) both,
+    allergyGlow 900ms var(--ease-out) 2;
+  animation-delay: calc(450ms + var(--i, 0) * 75ms), 1500ms;
+}
+@keyframes sumIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+}
+@keyframes allergyGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(from var(--amber) r g b / 0);
+  }
+  40% {
+    box-shadow: 0 0 0 6px rgb(from var(--amber) r g b / 0.35);
+  }
 }
 
 @media (min-width: 960px) {

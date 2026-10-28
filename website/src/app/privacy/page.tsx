@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { TextPage } from '@/components/TextPage';
+import { SITE } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Our privacy promise',
@@ -46,16 +47,22 @@ export default function Privacy() {
         <li>
           If you join the early list, we keep your mobile number <strong>only to tell you when Medifyles is ready</strong>.
         </li>
-        <li>We don&apos;t sell it, share it, or send you anything else.</li>
+        <li>
+          It goes straight to our team&apos;s inbox. We don&apos;t sell it, share it, or send you anything else.
+        </li>
       </ul>
 
       <h2>This website</h2>
       <ul>
         <li>This website doesn&apos;t use advertising or tracking cookies.</li>
-        <li>
-          If you choose a text size or colour theme here, it&apos;s remembered only in your own browser.
-        </li>
+        <li>If you choose a colour theme here, it&apos;s remembered only in your own browser.</li>
       </ul>
+
+      <h2>Questions</h2>
+      <p>
+        Call <a href={`tel:${SITE.supportPhoneHref}`}>{SITE.supportPhone}</a> or write to{' '}
+        <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.
+      </p>
     </TextPage>
   );
 }

@@ -21,10 +21,13 @@ export function Footer() {
           <Logo />
           <p className="caption">Only you and your family can see your papers.</p>
           {SITE.supportPhone && (
-            <a className={styles.link} href={`tel:${SITE.supportPhone}`}>
-              <Icon name="call" size={18} /> Call for help: {SITE.supportPhone}
+            <a className={styles.link} href={`tel:${SITE.supportPhoneHref}`}>
+              <Icon name="call" size={18} /> {SITE.supportPhone}
             </a>
           )}
+          <a className={styles.link} href={`mailto:${SITE.supportEmail}`}>
+            <Icon name="mail" size={18} /> {SITE.supportEmail}
+          </a>
         </div>
         <nav aria-label="Footer" className={styles.links}>
           {LINKS.map((l) => (

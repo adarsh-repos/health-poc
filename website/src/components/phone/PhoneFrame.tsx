@@ -12,13 +12,16 @@ export function PhoneFrame({
   children,
   label,
   className = '',
+  compact = false,
 }: {
   children: ReactNode;
   label: string;
   className?: string;
+  /** A shorter screen (390 × 720, about a compact iPhone), for screens with less content. */
+  compact?: boolean;
 }) {
   return (
-    <figure className={`${styles.frame} ${className}`}>
+    <figure className={`${styles.frame} ${compact ? styles.compact : ''} ${className}`}>
       <span className={`${styles.button} ${styles.action}`} aria-hidden />
       <span className={`${styles.button} ${styles.volUp}`} aria-hidden />
       <span className={`${styles.button} ${styles.volDown}`} aria-hidden />

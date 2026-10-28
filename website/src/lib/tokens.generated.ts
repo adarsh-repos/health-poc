@@ -36,7 +36,8 @@ export const TOKENS = {
     "paper-amber": "#8F5F00",
     "logo-pocket": "#1E3A75",
     "logo-paper": "#F5B862",
-    "logo-lines": "#1E3A75"
+    "logo-lines": "#1E3A75",
+    "logo-word-2": "#A86B0E"
   },
   "dark": {
     "page": "#090B12",
@@ -73,6 +74,7 @@ export const TOKENS = {
     "paper-amber": "#8F5F00",
     "logo-pocket": "#FFFFFF",
     "logo-paper": "#F5B862",
-    "logo-lines": "#1E3A75"
+    "logo-lines": "#1E3A75",
+    "logo-word-2": "#F5B862"
   }
 } as const;

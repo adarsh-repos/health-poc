@@ -167,6 +167,7 @@ People read the web from further away than a phone, and our readers are 55+. **T
 ### 4.5 Iconography and imagery
 
 - **Icons are Ionicons**, the set the app uses, so the site and app match. They always appear with a word, never alone (app principle 4).
+- **Compact phone** (S5 and S6): a shorter screen (390 × 720) at the same width (max 320px), so the phone matches the height of its content and the two sections look consistent.
 - **The device is realistic** (2026-10-28): metal edge (theme-aware titanium), black bezel, side buttons, Dynamic Island, real status icons and a home bar. Record thumbnails are tiny papers (letterhead, category rule, lines, stamp), not grey skeleton blocks.
 - **Product shots are faithful HTML rebuilds of real app screens** (Records timeline, Add › Source, Details, Saved, Show to doctor, Family) using the same tokens and the same copy, inside a plain device frame. They stay crisp, follow the site's theme, and can animate (E4–E6). Never show a screen or feature that isn't in the app.
 - **Papers are illustrated, not photographed.** They're vector or SVG with fake letterheads ("Dr. S. K. Mehta, MBBS"), stamps and folds, and **never contain real patient data**.
@@ -334,6 +335,11 @@ After the hero scrolls away on phones, a **bottom bar** (72h, safe-area aware) s
 | E10 | **Press** scale 0.98 and a lighter fill | All buttons and cards | `:active` | Colour change only |
 | E11 | **Phone follows the headline** (filter chip switches, list re-filters, cards slide in 70ms apart) | Hero | Same cycle as E1, pauses with it | Static list on the first filter |
 | E12 | **Phone rises in** (fade + 48px rise, 900ms) | Hero | Page load, once | Appears in place |
+| E14 | **Summary builds up** (name → blood group → allergies → … 75ms apart), then the **Allergies box glows amber twice** | S5 clinic phone | Enters view, once (after E5's turn) | Final state |
+| E15 | **Switcher slides in** one person at a time; a newly added member **pops in with a saffron ring** (×2) and a **"Just added" shimmer** (×2) | S6 Family | Enters view / member added | Final state |
+| E13 | **Add-a-member walkthrough** (~18s): Family tab → Step 1 (name types, Son picked, year) → Step 2 (mobile, Send code) → "Aarav is added" → empty records → first record. A tap ring marks each press. At the end Aarav pops into the switcher. | S6 Family phone | First time the section is half on screen; "Watch again" replays; tapping a person stops it | Skips to the end state (Aarav added, his record shown) |
+
+**E13 honesty note:** the walkthrough leaves out the Aadhaar and ABHA steps and shows no "Verified" badge, because ABHA isn't live yet (§11).
 
 **Never:** parallax backgrounds, cursor-follower blobs, magnetic buttons, text scramble or typewriter effects, marquees, auto-playing video with sound, scroll hijacking or smooth-scroll libraries, confetti, or hover effects that hide information. Nothing loops forever except E1, which can be paused.
 
@@ -424,4 +430,6 @@ After the hero scrolls away on phones, a **bottom bar** (72h, safe-area aware) s
 | 6 | People photos | **No** | Illustration and product UI only. |
 | 7 | Phase 0 app changes | **Approved, done** | `src/theme/palette.ts` holds the pure token data; light-mode amber is now `#8F5F00` in the app too. |
 
-**Still open:** where early-list sign-ups are delivered. The action posts to `EARLY_LIST_WEBHOOK_URL` (e.g. a Google Sheet via Apps Script, or a CRM). Until that's set, sign-ups are only logged on the server.
+**Contact (2026-10-28):** +91 93151 25250 · info@3innovators.com, in the footer, /help and /privacy (`SITE` in `src/lib/site.ts`).
+
+**Lead delivery (2026-10-28):** every early-list sign-up is **emailed to info@3innovators.com** through Resend (`RESEND_API_KEY`, `LEAD_EMAIL_FROM` on a verified domain, `LEAD_EMAIL_TO`; see `website/.env.example`). Optionally also posted to `EARLY_LIST_WEBHOOK_URL`. With neither set, development logs the sign-up and production shows "please try again", so nothing is lost silently.

@@ -13,6 +13,31 @@
 .word {
   font-size: 1.375rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.medi {
   color: var(--logo-pocket);
+}
+
+.fyles {
+  color: var(--logo-word-2);
+}
+
+/* The i's dot is a small paper: a rounded square, tilted like the paper in the mark. */
+.i {
+  position: relative;
+  display: inline-block;
+}
+.dot {
+  position: absolute;
+  left: 50%;
+  top: -0.02em; /* clear gap above the stem, like a real i-dot */
+  width: 0.2em;
+  height: 0.22em;
+  translate: -50% 0;
+  rotate: -12deg;
+  border-radius: 0.05em;
+  background: var(--logo-word-2);
 }

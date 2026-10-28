@@ -92,3 +92,20 @@ export const SUMMARY = {
   doctor: { name: 'Dr. S. K. Mehta', place: 'City Care Clinic · Jayanagar' },
   emergency: { name: 'Rajesh (son)' },
 };
+
+/** The member added in the Family section's walkthrough (S6). */
+export const NEW_MEMBER: DemoPerson = {
+  id: 'aarav',
+  name: 'Aarav Sharma',
+  short: 'Aarav',
+  relation: 'Son',
+  age: 32,
+  initials: 'AS',
+  tint: 'amber',
+  records: [{ title: 'Blood test (CBC)', category: 'lab', day: 28, weekday: 'Wed', month: 'Oct' }],
+};
+
+export const NEW_MEMBER_FLOW = {
+  birthYear: '1994',
+  mobile: '98101 23456',
+};
