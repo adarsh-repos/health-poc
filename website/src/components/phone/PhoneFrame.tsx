@@ -6,7 +6,8 @@ import styles from './phone.module.css';
  * A realistic phone (DESIGN §5): metal edge, black bezel, side buttons, Dynamic
  * Island and real status-bar icons. The screen inside is laid out on a 390px-wide
  * grid via container units, so it scales with the frame. Decorative: pass a
- * description for screen readers.
+ * description for screen readers. Every screen shows the made-up sample family,
+ * so the status bar carries a "Sample" tag where the clock would be.
  */
 export function PhoneFrame({
   children,
@@ -29,7 +30,7 @@ export function PhoneFrame({
       <div className={styles.bezel}>
         <div className={styles.screen} aria-hidden>
           <div className={styles.status}>
-            <span className={styles.time}>9:41</span>
+            <span className={styles.sample}>Sample</span>
             <span className={styles.island} />
             <span className={styles.statusIcons}>
               {/* Signal */}

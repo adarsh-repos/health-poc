@@ -48,7 +48,7 @@ export function OlderEyes() {
 
         <div className={styles.demo}>
           <div className={`${styles.preview} ${themeClass} ${contrastClass}`}>
-            <p className={styles.pEyebrow}>Lab report · 21 Oct 2026</p>
+            <p className={styles.pEyebrow}>Sample · Lab report · 21 Oct 2026</p>
             <p className={styles.pTitle}>Sugar test (HbA1c)</p>
             <p className={styles.pBody}>2 pages · Saved for Rajesh</p>
             <span className={styles.pButton}>

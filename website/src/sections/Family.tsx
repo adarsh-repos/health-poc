@@ -107,7 +107,8 @@ export function Family() {
             Your parents, your partner, you. One app.
           </h2>
           <p className="lead" data-reveal style={{ '--i': 2 } as React.CSSProperties}>
-            Each person gets their own records and their own health details. Switch between them with one tap.
+            Each person gets their own records and their own health details. Switch between them with one tap. To add
+            another adult, the app sends a code to their mobile so they can agree.
           </p>
 
           <div className={styles.switcher} role="group" aria-label="Choose a family member">
@@ -168,7 +169,7 @@ export function Family() {
           <PhoneFrame
             compact
             className={styles.phone}
-            label="A short demo of the app: adding Aarav as a son (name, relation, year of birth, mobile number), then his first lab report."
+            label="A short demo with a sample family: adding Aarav as a son (name, relation, year of birth, mobile number), then his first lab report."
           >
             {demo ? (
               <div key={`step-${demo.step}`} className={styles.swap}>

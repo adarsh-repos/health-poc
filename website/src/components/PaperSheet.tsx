@@ -5,9 +5,9 @@ import { Icon } from './Icon';
 import styles from './PaperSheet.module.css';
 
 const HEAD: Record<Category, { org: string; sub: string }> = {
-  prescription: { org: 'Dr. S. K. Mehta', sub: 'MBBS, MD (Medicine)' },
-  lab: { org: 'City Diagnostics', sub: 'Lipid profile · Fasting' },
-  bill: { org: 'Shree Medicals', sub: 'Cash memo · GST incl.' },
+  prescription: { org: 'Dr. Sample', sub: 'Sample prescription' },
+  lab: { org: 'Sample Lab', sub: 'Sample report · Not real' },
+  bill: { org: 'Sample Chemist', sub: 'Sample bill · Not real' },
 };
 
 /**

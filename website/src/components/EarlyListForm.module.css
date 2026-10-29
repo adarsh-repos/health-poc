@@ -74,6 +74,11 @@
   font-size: 1rem;
   color: var(--text-2);
 }
+.hint a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 .error {
   display: flex;

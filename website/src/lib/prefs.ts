@@ -24,12 +24,13 @@ function setAttr(name: 'theme', value: string | null) {
 // stay right even when storage is blocked.
 const attr = (name: 'theme') => document.documentElement.dataset[name];
 
+/** Light is the default, so it's stored as "no choice"; Dark and Auto are explicit. */
 export const getTheme = (): ThemePref => {
   const t = attr('theme');
-  return t === 'light' || t === 'dark' ? t : 'system';
+  return t === 'dark' || t === 'system' ? t : 'light';
 };
 export function setTheme(t: ThemePref) {
-  const v = t === 'system' ? null : t;
+  const v = t === 'light' ? null : t;
   setAttr('theme', v);
   write('mf-theme', v);
 }

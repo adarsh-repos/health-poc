@@ -19,6 +19,7 @@ interface Lead {
  * Lead generation: every early-list sign-up is emailed to the team inbox
  * (LEAD_EMAIL_TO, default SITE.supportEmail) through Resend's HTTP API.
  * Needs RESEND_API_KEY and a sender on a verified domain (LEAD_EMAIL_FROM).
+ * Prefer a dedicated LEAD_EMAIL_TO that only the launch team reads (see /privacy).
  */
 async function emailLead(lead: Lead) {
   const key = process.env.RESEND_API_KEY;
@@ -30,7 +31,8 @@ async function emailLead(lead: Lead) {
     body: JSON.stringify({
       from: process.env.LEAD_EMAIL_FROM ?? 'Medifyles website <leads@medifyles.com>',
       to: [process.env.LEAD_EMAIL_TO ?? SITE.supportEmail],
-      subject: `New early-list sign-up: ${lead.phone}`,
+      // No number in the subject: subjects show in notifications and inbox previews.
+      subject: 'New early-list sign-up',
       text: [
         'Someone joined the Medifyles early list.',
         '',
@@ -38,7 +40,9 @@ async function emailLead(lead: Lead) {
         `Signed up from: ${lead.source} section`,
         `When: ${when} IST`,
         '',
-        'Promise made on the site: we use this number only to tell them when the app is ready.',
+        'Promise made on the site (/privacy): use this number for ONE message when the app is in the stores,',
+        `then delete it within ${SITE.earlyList.deleteAfterLaunchDays} days, or by ${SITE.earlyList.deleteBy} if the app hasn't launched.`,
+        'Never use it for marketing or share it. Delete this email when the list is deleted.',
       ].join('\n'),
     }),
     signal: AbortSignal.timeout(8000),

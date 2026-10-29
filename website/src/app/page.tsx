@@ -1,4 +1,5 @@
 import { Faq } from '@/components/Faq';
+import { RevealObserver } from '@/components/RevealObserver';
 import { SITE } from '@/lib/site';
 import { Bag } from '@/sections/Bag';
 import { Closing } from '@/sections/Closing';
@@ -41,6 +42,8 @@ export default function Home() {
       </section>
       <Closing />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
+      {/* Here, not in the layout: its effect must run after these sections hydrate, or adding `is-in` causes a mismatch. */}
+      <RevealObserver />
     </>
   );
 }

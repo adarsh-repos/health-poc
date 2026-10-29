@@ -17,11 +17,10 @@ const STORIES: { category: Category; word: string }[] = [
   { category: 'bill', word: 'pharmacy bills' },
 ];
 
+/** Each fact is backed in docs/CLAIMS.md. */
 const FACTS: { icon: IconName; text: string; tone: string }[] = [
   { icon: 'gift-outline', text: 'Free', tone: 'var(--accent-text)' },
-  { icon: 'lock-closed', text: 'Private', tone: 'var(--green)' },
-  { icon: 'time-outline', text: '2 min to set up', tone: 'var(--steel-text)' },
-  { icon: 'id-card-outline', text: 'Aadhaar ready', tone: 'var(--amber)' },
+  { icon: 'phone-portrait-outline', text: 'Kept on your phone', tone: 'var(--green)' },
 ];
 
 const CYCLE_MS = 3200;
@@ -60,7 +59,7 @@ export function Hero() {
           <p className="overline">For you and your family</p>
           <h1 id="hero-title" className={`display ${styles.title}`}>
             <span className="visually-hidden">
-              All your prescriptions, lab reports and pharmacy bills in one safe place.
+              All your prescriptions, lab reports and pharmacy bills in one place.
             </span>
             <span aria-hidden>
               All your
@@ -73,23 +72,27 @@ export function Hero() {
                 ))}
               </span>
               <br />
-              in one safe place.
+              in one place.
             </span>
           </h1>
           <p className="lead">
-            Take a photo of any medical paper. Medifyles keeps it safe, in date order, for every person in your
-            family.
+            Take a photo of any medical paper. Medifyles keeps it on your phone, in date order, for every person in
+            your family.
           </p>
         </div>
 
         <div className={styles.visual}>
-          <PhoneFrame
-            className={styles.phone}
-            label="The Medifyles Records screen: papers listed by date for Rajesh, with his wife and mother one tap away."
-          >
-            {/* The phone's filter follows the headline word, like tapping the app's chips. */}
-            <RecordsScreen person={FAMILY[0]} filter={story.category} />
-          </PhoneFrame>
+          <div className={styles.phone}>
+            <PhoneFrame label="Sample records on the Medifyles Records screen: made-up papers listed by date for Rajesh, with his wife and mother one tap away.">
+              {/* The phone's filter follows the headline word, like tapping the app's chips. */}
+              <RecordsScreen person={FAMILY[0]} filter={story.category} />
+            </PhoneFrame>
+            {/* A sticker on the phone's corner: the app isn't out yet. */}
+            <p className={styles.soon}>
+              <span className={styles.soonDot} aria-hidden />
+              Coming soon
+            </p>
+          </div>
 
           <div className={styles.stack} role="group" aria-label="Kinds of paper Medifyles keeps">
             {STORIES.map((s, i) => {

@@ -7,7 +7,8 @@ import { Avatar, RecordsScreen } from './screens';
 /*
  * S6 walkthrough: adding a family member, then their first record, with the
  * app's real copy (app/(tabs)/family.tsx, app/member/add/*). Aadhaar and ABHA
- * steps are left out on purpose: ABHA isn't live yet (DESIGN §11).
+ * are left out on purpose, including the "as on Aadhaar" hint: neither is live,
+ * and the site doesn't advertise them (DESIGN §11, docs/CLAIMS.md).
  */
 
 export const DEMO_STEPS = [
@@ -93,7 +94,7 @@ export function MemberDemo({ step, elapsed }: { step: number; elapsed: number })
       <div className={s.page}>
         <StepBar step={1} />
         <p className={d.stepTitle}>Add a family member</p>
-        <p className={s.subtitle}>Next we&apos;ll verify their mobile and Aadhaar.</p>
+        <p className={s.subtitle}>Next we&apos;ll verify their mobile number.</p>
         <div className={`${d.preview} ${filled ? d.previewOn : ''}`}>
           {filled ? (
             <>
@@ -111,7 +112,7 @@ export function MemberDemo({ step, elapsed }: { step: number; elapsed: number })
             <span className={s.catLine}>Your new family member appears here</span>
           )}
         </div>
-        <label className={d.fieldLabel}>Full name (as on Aadhaar)</label>
+        <label className={d.fieldLabel}>Full name</label>
         <div className={`${s.input} ${d.focus}`}>
           {name || <span className={d.placeholder}>e.g. Saraswati Devi</span>}
           {elapsed < 2100 && <i className={d.caret} />}
@@ -149,7 +150,7 @@ export function MemberDemo({ step, elapsed }: { step: number; elapsed: number })
           </span>
           <span className={s.cardText}>
             <b>Use my number</b>
-            <span className={s.catLine}>98765 43210 · if Aarav uses your phone</span>
+            <span className={s.catLine}>12345 67890 · if Aarav uses your phone</span>
           </span>
           <Icon name="chevron-forward" className={s.chev} />
         </div>
@@ -157,7 +158,7 @@ export function MemberDemo({ step, elapsed }: { step: number; elapsed: number })
         <label className={d.fieldLabel}>Mobile number</label>
         <div className={`${s.input} ${d.focus}`}>
           <b className={d.prefix}>+91</b>
-          {number || <span className={d.placeholder}>98765 43210</span>}
+          {number || <span className={d.placeholder}>10-digit number</span>}
           {number.length < NEW_MEMBER_FLOW.mobile.length && <i className={d.caret} />}
         </div>
         <span className={`${s.primary} ${d.footer} ${number.length < NEW_MEMBER_FLOW.mobile.length ? d.disabled : ''}`}>
@@ -201,7 +202,7 @@ export function MemberDemo({ step, elapsed }: { step: number; elapsed: number })
             <Icon name="document-text" />
           </span>
           <b>Your timeline is empty</b>
-          <span className={s.catLine}>Add your first one. It takes 30 seconds.</span>
+          <span className={s.catLine}>Add your first one with a photo.</span>
         </div>
         <span className={s.addBtn}>
           <Icon name="add" />

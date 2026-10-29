@@ -19,7 +19,9 @@ export function Footer() {
       <div className={`container ${styles.grid}`}>
         <div className={styles.brand}>
           <Logo />
-          <p className="caption">Only you and your family can see your papers.</p>
+          <p className="caption">
+            Medifyles keeps your papers on your phone. It sorts them; it doesn&apos;t give medical advice.
+          </p>
           {SITE.supportPhone && (
             <a className={styles.link} href={`tel:${SITE.supportPhoneHref}`}>
               <Icon name="call" size={18} /> {SITE.supportPhone}
@@ -39,7 +41,10 @@ export function Footer() {
         <DisplayControls />
       </div>
       <div className={`container ${styles.base}`}>
-        <p className="caption">© Medifyles · For families who keep medical papers</p>
+        <p className="caption">
+          © 2026 {SITE.company} · Medifyles is coming soon to Android and iPhone · Product
+          pictures show a sample family and made-up records
+        </p>
       </div>
     </footer>
   );

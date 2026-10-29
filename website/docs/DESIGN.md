@@ -58,7 +58,7 @@ This works because:
 2. **How:** Take a photo, pick what it is, and it's saved by date and by person.
 3. **Payoff at the clinic:** Show to doctor. One tap gives a big, clear summary with allergies first.
 4. **Family:** One app for everyone you look after.
-5. **Trust:** Only you and your family can see these. Your Aadhaar is never stored.
+5. **Trust:** Your papers stay on your phone. We don't have a copy. (Revised 2026-10-29 after legal review, see docs/CLAIMS.md.)
 6. **Built for you:** big text, plain words, nothing deletes by accident.
 
 ### 2.3 Voice (inherits app §6)
@@ -103,7 +103,7 @@ The site uses the app's **Coral** accent from `ACCENTS.coral` (the contrast-chec
 
 | Role | Light | Dark | Rule |
 |---|---|---|---|
-| Page | `#F6F5F2` warm off-white | `#0A0A0B` ink | Follows the system setting, with a toggle in the footer |
+| Page | `#F6F5F2` warm off-white | `#0A0A0B` ink | **Light is the default** (2026-10-30, was Dark from 2026-10-28) for every first visit. The footer offers Light / Dark / Auto (follow the device); a choice is remembered in the browser |
 | Card | `#FFFFFF` | `#141417` | |
 | Paper (illustrations) | `#F1EEE7` | `#ECE9E2` | Papers stay light in dark mode, as real paper does |
 | **Primary CTA fill** | `#D2402F` | `#D03E30` | **Coral is only for the primary action and the active state.** Never for decoration. |
@@ -258,7 +258,7 @@ The page is read top to bottom like the app's onboarding: **one idea per section
   - Works in light or dark, with extra contrast.
   - The text grows with your phone's text-size setting.
 
-### S8 · Trust: "Only you and your family can see these."
+### S8 · Trust: "Your papers stay on your phone." (was "Only you and your family can see these"; revised 2026-10-29)
 - This mirrors app principle 3, **security that's felt, not explained**: no badges, padlock illustrations or compliance logos.
 - Three plain promises, each one checked against the product (§11):
   1. **Your Aadhaar number is never stored.** We keep only the last 4 digits.
@@ -397,7 +397,7 @@ After the hero scrolls away on phones, a **bottom bar** (72h, safe-area aware) s
 | 6 Always show where you are | Sticky header. The sticky phone shows "Step 2 of 3". | ✓ |
 | 7 Forgiving input | No forms on the site at all. WhatsApp is prefilled. | ✓ |
 
-**Claim audit** (every marketing claim checked against the current app)
+**Claim audit** (every marketing claim checked against the current app). The full evidence sheet and data-flow map is [CLAIMS.md](CLAIMS.md).
 
 | Claim | True today? | Source |
 |---|---|---|
@@ -407,9 +407,9 @@ After the hero scrolls away on phones, a **bottom bar** (72h, safe-area aware) s
 | Saved in date order, per person | ✅ | Records timeline |
 | Show to doctor: allergies first, screen stays awake | ✅ | `member/[id]/summary.tsx`, `expo-keep-awake` |
 | Share as one PDF | ✅ | `features/records/share.ts` |
-| Aadhaar never stored, only last 4 | ✅ | README architecture |
+| Aadhaar never stored, only last 4 | ⛔ **Removed from the site 2026-10-29**: Aadhaar is mocked and should be optional (docs/CLAIMS.md) | README architecture |
 | ABHA found from Aadhaar, or create one | ⚠️ **Mocked**: the ABDM gateway isn't live (README next steps). Don't publish until it is live. | `services/abdm.ts` |
-| "Only you and your family can see these" | ✅ Local-first today. Re-check when cloud sync ships. | |
+| "Only you and your family can see these" | ⛔ **Replaced 2026-10-29** with "Your papers stay on your phone": anyone who can unlock the phone can see every profile | |
 | "What if I change my phone?" | ❌ **No sync or backup yet.** Leave this FAQ out, or answer honestly. | README next steps |
 | Light/dark, extra contrast, text scaling | ✅ | Me › Appearance |
 | Doctor's clinic and location | ✅ (added 2026-10-26) | `features/family/types.ts` |

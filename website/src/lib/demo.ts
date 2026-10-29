@@ -1,6 +1,7 @@
 /**
  * Sample family used in every product visual. All people, doctors and places
- * are made up. Category labels and icons match the app (features/records/categories.ts).
+ * are made up, and every visual is tagged "Sample". Shops and clinics use
+ * invented names; mobile numbers start with 1, so they can't be real. Category labels and icons match the app (features/records/categories.ts).
  */
 import type { IconName } from '@/components/Icon';
 
@@ -44,11 +45,11 @@ export const FAMILY: DemoPerson[] = [
     records: [
       { title: 'Sugar test (HbA1c)', category: 'lab', day: 21, weekday: 'Wed', month: 'Oct', pages: 2 },
       { title: 'BP medicines', category: 'prescription', day: 21, weekday: 'Wed', month: 'Oct' },
-      { title: 'Shree Medicals', category: 'bill', day: 14, weekday: 'Wed', month: 'Oct' },
+      { title: 'Banyan Tree Chemist', category: 'bill', day: 14, weekday: 'Wed', month: 'Oct' },
       { title: 'Eye check-up', category: 'prescription', day: 2, weekday: 'Fri', month: 'Oct' },
       { title: 'Cholesterol (lipid profile)', category: 'lab', day: 28, weekday: 'Mon', month: 'Sep' },
       { title: 'Fever and cough', category: 'prescription', day: 24, weekday: 'Thu', month: 'Sep' },
-      { title: 'Sai Medical Hall', category: 'bill', day: 24, weekday: 'Thu', month: 'Sep' },
+      { title: 'Neem Leaf Pharmacy', category: 'bill', day: 24, weekday: 'Thu', month: 'Sep' },
     ],
   },
   {
@@ -75,7 +76,7 @@ export const FAMILY: DemoPerson[] = [
     tint: 'green',
     records: [
       { title: 'Diabetes follow-up', category: 'prescription', day: 24, weekday: 'Sat', month: 'Oct' },
-      { title: 'Gupta Medical Store', category: 'bill', day: 24, weekday: 'Sat', month: 'Oct' },
+      { title: 'Lotus Pond Medicals', category: 'bill', day: 24, weekday: 'Sat', month: 'Oct' },
       { title: 'Kidney function test', category: 'lab', day: 11, weekday: 'Sun', month: 'Oct', pages: 2 },
     ],
   },
@@ -89,7 +90,7 @@ export const SUMMARY = {
   allergies: 'Penicillin, Sulpha drugs',
   conditions: ['Diabetes', 'High BP'],
   medicines: ['Metformin 500 mg', 'Amlodipine 5 mg'],
-  doctor: { name: 'Dr. S. K. Mehta', place: 'City Care Clinic · Jayanagar' },
+  doctor: { name: 'Dr. Sample Doctor', place: 'Sample Clinic · Sample Nagar' },
   emergency: { name: 'Rajesh (son)' },
 };
 
@@ -107,5 +108,5 @@ export const NEW_MEMBER: DemoPerson = {
 
 export const NEW_MEMBER_FLOW = {
   birthYear: '1994',
-  mobile: '98101 23456',
+  mobile: '12345 98765',
 };

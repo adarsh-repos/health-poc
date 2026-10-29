@@ -4,9 +4,12 @@ import { SummaryScreen } from '@/components/phone/screens';
 import styles from './ShowToDoctor.module.css';
 
 const POINTS: { icon: IconName; text: string }[] = [
-  { icon: 'hand-left-outline', text: 'One tap from their profile. Hand the phone across the desk.' },
+  { icon: 'hand-left-outline', text: 'One tap from their profile. Hand the phone across the desk. Nothing is sent.' },
   { icon: 'call', text: "Their doctor's name, clinic and location, and who to call in an emergency." },
-  { icon: 'share-social', text: 'Need a report too? Share it as one PDF on WhatsApp or email.' },
+  {
+    icon: 'share-social',
+    text: "Need a report too? Send just that record on WhatsApp or email. Once sent, the copy is outside Medifyles.",
+  },
 ];
 
 /** S5 · Show to doctor (DESIGN §6, E5): the phone turns to face you, once. */
@@ -41,7 +44,7 @@ export function ShowToDoctor() {
           <div className={styles.turn}>
             <PhoneFrame
               compact
-              label="Show to doctor: Kamla Devi's health summary with blood group B+ and her allergies to Penicillin and Sulpha drugs at the top.">
+              label="Sample record. Show to doctor: Kamla Devi's made-up health summary with blood group B+ and her allergies to Penicillin and Sulpha drugs at the top.">
               <SummaryScreen />
             </PhoneFrame>
           </div>

@@ -75,6 +75,127 @@
   color: var(--tone);
 }
 
+/*
+ * "Coming soon": a small sticker on the hero phone's top-right corner, with a
+ * live dot and a slow sheen. Navy on light pages, saffron on dark ones.
+ * It pops on once the phone has risen into place.
+ */
+.soon {
+  --soon-bg: var(--accent);
+  --soon-fg: var(--on-accent);
+  --soon-dot: color-mix(in srgb, var(--amber) 35%, var(--on-accent));
+  position: absolute;
+  z-index: 5;
+  /* Phones: on the corner, inside the cropped picture and clear of the "Sample" tag. */
+  top: 2.5%;
+  right: -1%;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 3px 8px 3px 7px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  rotate: 6deg;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--soon-fg);
+  background: var(--soon-bg);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--soon-bg) 35%, transparent);
+}
+:global(:root[data-theme='dark']) .soon {
+  --soon-bg: var(--amber);
+  --soon-fg: var(--page);
+  --soon-dot: var(--page);
+}
+@media (prefers-color-scheme: dark) {
+  :global(:root[data-theme='system']) .soon {
+    --soon-bg: var(--amber);
+    --soon-fg: var(--page);
+    --soon-dot: var(--page);
+  }
+}
+.soonDot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--soon-dot);
+}
+.soonDot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--soon-dot);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .soon {
+    animation:
+      soon-pop 560ms var(--spring) 1000ms both,
+      soon-glow 3.2s ease-in-out 1600ms infinite;
+  }
+  /* A soft band of light that crosses the sticker now and then. */
+  .soon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      color-mix(in srgb, var(--soon-fg) 28%, transparent) 50%,
+      transparent 70%
+    );
+    translate: -100% 0;
+    animation: soon-sheen 4.2s ease-in-out 1s infinite;
+  }
+  .soonDot::after {
+    animation: soon-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+}
+
+@keyframes soon-pop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+@keyframes soon-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  80%,
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+@keyframes soon-sheen {
+  0% {
+    translate: -100% 0;
+  }
+  45%,
+  100% {
+    translate: 100% 0;
+  }
+}
+@keyframes soon-glow {
+  0%,
+  100% {
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--soon-bg) 25%, transparent);
+  }
+  50% {
+    box-shadow: 0 4px 22px color-mix(in srgb, var(--soon-bg) 55%, transparent);
+  }
+}
+
 /* ---------- Visual: phone + paper stack ---------- */
 
 /*
@@ -224,8 +345,19 @@
     padding-bottom: 40px;
   }
   /* The phone is about 2.17× as tall as wide: keep it within the banner's height. */
+  .soon {
+    top: -10px;
+    right: -14px;
+    gap: 7px;
+    padding: 6px 13px 6px 10px;
+    font-size: 0.875rem;
+  }
+  .soonDot {
+    width: 8px;
+    height: 8px;
+  }
   .phone {
-    position: static;
+    position: relative;
     width: min(78%, 390px, calc((var(--hero-h) - 96px) / 2.12));
     transform: rotate(4deg);
     transform-origin: bottom right;

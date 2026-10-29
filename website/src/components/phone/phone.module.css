@@ -81,9 +81,14 @@
   height: calc(var(--u) * 54);
   padding-inline: calc(var(--u) * 32) calc(var(--u) * 26);
 }
-.time {
-  font-size: calc(var(--u) * 16);
+.sample {
+  padding: calc(var(--u) * 3) calc(var(--u) * 9);
+  border-radius: 99px;
+  background: var(--fill-subtle);
+  border: 1px solid var(--stroke);
+  font-size: calc(var(--u) * 13);
   font-weight: 700;
+  letter-spacing: 0.02em;
 }
 .island {
   position: absolute;

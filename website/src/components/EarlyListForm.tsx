@@ -1,9 +1,10 @@
 'use client';
 
+import Link from 'next/link';
 import { useActionState, useId, useState } from 'react';
 
 import { joinEarlyList, type JoinState } from '@/app/actions';
-import { whatsappShareUrl } from '@/lib/site';
+import { SITE, whatsappShareUrl } from '@/lib/site';
 import styles from './EarlyListForm.module.css';
 import { Icon } from './Icon';
 
@@ -46,7 +47,10 @@ function JoinForm({ id, source }: { id: string; source: string }) {
         </span>
         <div className="stack" style={{ gap: 6 }}>
           <p className="h3">You&apos;re on the list.</p>
-          <p className="body">We&apos;ll send one message when Medifyles is ready. Nothing else.</p>
+          <p className="body">
+            Medifyles is coming soon. We&apos;ll send one message to this number when it&apos;s in the app stores,
+            then delete your number. Nothing else.
+          </p>
           <a className="btn btn-secondary btn-whatsapp" href={whatsappShareUrl()} target="_blank" rel="noopener">
             <Icon name="logo-whatsapp" />
             Tell your family on WhatsApp
@@ -108,7 +112,8 @@ function JoinForm({ id, source }: { id: string; source: string }) {
         </p>
       ) : (
         <p id={hintId} className={styles.hint}>
-          Free. We&apos;ll only use your number to tell you when the app is ready.
+          Coming soon to Android and iPhone. We&apos;ll use your number for one message when the app is ready, then
+          delete it (by {SITE.earlyList.deleteBy} at the latest). <Link href="/privacy#early-list">How we keep it</Link>
         </p>
       )}
     </form>

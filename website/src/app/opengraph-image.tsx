@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og';
 import { MARK } from '@/components/logo.generated';
 import { TOKENS } from '@/lib/tokens.generated';
 
-export const alt = 'Medifyles: all your prescriptions, lab reports and pharmacy bills in one safe place.';
+export const alt = 'Medifyles: all your prescriptions, lab reports and pharmacy bills in one place.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -62,9 +62,9 @@ export default function Image() {
             Medifyles
           </div>
           <div style={{ fontSize: 66, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
-            All your medical papers in one safe place.
+            All your medical papers in one place.
           </div>
-          <div style={{ fontSize: 30, color: t['text-2'] }}>For you and your family. Free.</div>
+          <div style={{ fontSize: 30, color: t['text-2'] }}>For you and your family. Free. Coming soon.</div>
         </div>
         <div style={{ position: 'relative', width: 300, height: 360, display: 'flex' }}>
           {paper(24, t['paper-amber'])}

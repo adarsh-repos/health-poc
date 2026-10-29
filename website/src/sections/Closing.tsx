@@ -18,7 +18,8 @@ export function Closing() {
           Set it up today. Find any paper tomorrow.
         </h2>
         <p className="lead" data-reveal style={{ '--i': 1 } as React.CSSProperties}>
-          Free. Coming soon to Android and iPhone. Join the early list and we&apos;ll tell you the day it&apos;s ready.
+          Free. Not out yet: coming soon to Android and iPhone. Join the early list and we&apos;ll send one message
+          the day it&apos;s in the app stores.
         </p>
         <EarlyListForm id="join" source="closing" />
         <a className="btn btn-secondary btn-whatsapp" href={whatsappShareUrl()} target="_blank" rel="noopener">

@@ -5,14 +5,14 @@ import styles from './DisplayControls.module.css';
 import { Icon, type IconName } from './Icon';
 
 const THEMES: { value: ThemePref; label: string; icon: IconName }[] = [
-  { value: 'system', label: 'Auto', icon: 'contrast' },
   { value: 'light', label: 'Light', icon: 'sunny' },
   { value: 'dark', label: 'Dark', icon: 'moon' },
+  { value: 'system', label: 'Auto', icon: 'contrast' },
 ];
 
-/** The app's Me › Appearance theme choice, on the web. */
+/** Theme choice: Light (the site's default), Dark, or Auto (follow the device). */
 export function DisplayControls() {
-  const theme = usePref(getTheme, 'system');
+  const theme = usePref(getTheme, 'light');
 
   return (
     <div className={styles.wrap}>

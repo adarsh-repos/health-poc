@@ -3,22 +3,22 @@ import Link from 'next/link';
 import { Icon, type IconName } from '@/components/Icon';
 import styles from './Trust.module.css';
 
-/** Each promise is checked against the app (DESIGN §11). Keep them true. */
+/** Each promise is checked against the app (DESIGN §11, docs/CLAIMS.md). Keep them true. */
 const PROMISES: { icon: IconName; title: string; body: string }[] = [
   {
-    icon: 'id-card-outline',
-    title: 'Your Aadhaar number is never stored.',
-    body: 'We keep only the last 4 digits, and we ask you before sending any OTP.',
-  },
-  {
-    icon: 'document-text',
-    title: 'Your papers stay as you saved them.',
-    body: 'Every page, in full quality, in date order.',
+    icon: 'phone-portrait-outline',
+    title: "We don't have a copy.",
+    body: "Your papers are saved in the app on your phone, not on our servers. The Medifyles team can't see them.",
   },
   {
     icon: 'share-social',
-    title: 'Nothing is shared unless you share it.',
-    body: 'You choose what goes to a doctor, and when.',
+    title: 'Nothing leaves your phone unless you send it.',
+    body: "You pick the record, the app and the person. Once it's sent on WhatsApp or email, that copy is outside Medifyles.",
+  },
+  {
+    icon: 'lock-closed',
+    title: "Your phone's lock is the lock.",
+    body: "Anyone who can open your phone can open Medifyles. We don't back up your papers, so keep the paper originals too.",
   },
 ];
 
@@ -32,10 +32,10 @@ export function Trust() {
             <Icon name="lock-closed" />
           </span>
           <h2 id="trust-title" className="h2" data-reveal>
-            Only you and your family can see these.
+            Your papers stay on your phone.
           </h2>
           <Link href="/privacy" className="btn btn-ghost" data-reveal style={{ '--i': 1 } as React.CSSProperties}>
-            Read our privacy promise
+            Exactly how your data is handled
             <Icon name="arrow-forward" />
           </Link>
         </div>
