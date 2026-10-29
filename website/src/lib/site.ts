@@ -13,9 +13,9 @@ export const SITE = {
   /** Contact (2026-10-28). `phoneHref` is the dialable form. */
   supportPhone: '+91 93151 25250' as string | null,
   supportPhoneHref: '+919315125250',
-  supportEmail: 'info@3innovators.com',
+  supportEmail: 'info@medifyles.com',
   /** Privacy and grievance requests (deletion, access, complaints). TODO: name the grievance officer. */
-  privacyEmail: 'info@3innovators.com',
+  privacyEmail: 'info@medifyles.com',
   /** The early-list promise: one launch message, then the number is deleted. */
   earlyList: {
     deleteAfterLaunchDays: 30,

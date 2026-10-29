@@ -10,6 +10,7 @@ const LINKS = [
   { href: '/#how', label: 'How it works' },
   { href: '/for-families', label: 'For families' },
   { href: '/help', label: 'Help & questions' },
+  { href: '/help#write', label: 'Write to us' },
   { href: '/privacy', label: 'Privacy' },
 ];
 

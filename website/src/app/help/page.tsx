@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { ContactForm } from '@/components/ContactForm';
 import { Faq } from '@/components/Faq';
 import { TextPage } from '@/components/TextPage';
 import { SITE } from '@/lib/site';
@@ -18,9 +19,11 @@ export default function Help() {
       intro="Short answers, in plain words. If something isn't here, call or write to us. A real person will help."
     >
       <Faq />
-      <h2>Still need help?</h2>
+      <h2 id="write">Write to us</h2>
+      <p>Send us a message here. A real person will reply to your email.</p>
+      <ContactForm />
       <p>
-        Call us on <a href={`tel:${SITE.supportPhoneHref}`}>{SITE.supportPhone}</a> or write to{' '}
+        Or call us on <a href={`tel:${SITE.supportPhoneHref}`}>{SITE.supportPhone}</a>, or email{' '}
         <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.
       </p>
     </TextPage>

@@ -1,0 +1,121 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 560px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.optional {
+  font-weight: 500;
+  color: var(--text-3);
+}
+
+.input {
+  width: 100%;
+  min-height: 60px;
+  padding: 14px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 2px solid var(--stroke);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.125rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color var(--dur-ui) var(--ease-out);
+}
+.input:focus {
+  border-color: var(--accent-text);
+}
+.input::placeholder {
+  color: var(--text-3);
+}
+.area {
+  min-height: 150px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.invalid {
+  border-color: var(--danger);
+}
+
+.send {
+  align-self: flex-start;
+}
+.send[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 1rem;
+  color: var(--text-2);
+}
+.hint a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.done {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  max-width: 560px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  animation: pop var(--dur-enter) var(--spring);
+}
+
+.check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--green);
+  color: var(--page);
+}
+.check svg {
+  width: 26px;
+  height: 26px;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}

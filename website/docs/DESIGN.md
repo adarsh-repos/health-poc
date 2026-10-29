@@ -430,6 +430,8 @@ After the hero scrolls away on phones, a **bottom bar** (72h, safe-area aware) s
 | 6 | People photos | **No** | Illustration and product UI only. |
 | 7 | Phase 0 app changes | **Approved, done** | `src/theme/palette.ts` holds the pure token data; light-mode amber is now `#8F5F00` in the app too. |
 
-**Contact (2026-10-28):** +91 93151 25250 · info@3innovators.com, in the footer, /help and /privacy (`SITE` in `src/lib/site.ts`).
+**Contact (2026-10-28):** +91 93151 25250 · info@medifyles.com, in the footer, /help and /privacy (`SITE` in `src/lib/site.ts`).
 
-**Lead delivery (2026-10-28):** every early-list sign-up is **emailed to info@3innovators.com** through Resend (`RESEND_API_KEY`, `LEAD_EMAIL_FROM` on a verified domain, `LEAD_EMAIL_TO`; see `website/.env.example`). Optionally also posted to `EARLY_LIST_WEBHOOK_URL`. With neither set, development logs the sign-up and production shows "please try again", so nothing is lost silently.
+**Write to us (2026-10-30):** a contact form on /help (`src/components/ContactForm.tsx`, `sendMessage` in `src/app/actions.ts`) emails the message to info@medifyles.com through Resend, with reply-to set to the visitor. Footer links to it. Covered on /privacy#messages.
+
+**Lead delivery (2026-10-28):** every early-list sign-up is **emailed to info@medifyles.com** through Resend (`RESEND_API_KEY`, `LEAD_EMAIL_FROM` on a verified domain, `LEAD_EMAIL_TO`; see `website/.env.example`). Optionally also posted to `EARLY_LIST_WEBHOOK_URL`. With neither set, development logs the sign-up and production shows "please try again", so nothing is lost silently.

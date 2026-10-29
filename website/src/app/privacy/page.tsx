@@ -69,6 +69,32 @@ export default function Privacy() {
         </li>
       </ul>
 
+      <h2 id="messages">Messages you send us (this website)</h2>
+      <ul>
+        <li>
+          <strong>What we collect:</strong> what you type in the &ldquo;Write to us&rdquo; form: your name (if you give
+          it), your email and your message.
+        </li>
+        <li>
+          <strong>Why:</strong> only to reply to you. We don&apos;t add you to any list.
+        </li>
+        <li>
+          <strong>Where it goes:</strong> our website emails it to {SITE.supportEmail}, through our email delivery
+          service (Resend).
+        </li>
+        <li>
+          <strong>Who can see it:</strong> only the Medifyles team.
+        </li>
+        <li>
+          <strong>How long we keep it:</strong> until your question is sorted, and no longer than 12 months. Ask us
+          and we&apos;ll delete it sooner.
+        </li>
+        <li>
+          Please don&apos;t send medical papers or health details in a message. Medifyles doesn&apos;t need them to help
+          you.
+        </li>
+      </ul>
+
       <h2>Browsing this website</h2>
       <ul>
         <li>No advertising, no analytics and no tracking cookies.</li>

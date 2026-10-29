@@ -11,8 +11,9 @@ Last reviewed: 2026-10-29, against the app in `../src` (local-first build, ABDM/
 
 | Data | Collected by | Goes to | Who can access | Kept for | Deletion |
 |---|---|---|---|---|---|
-| Early-list mobile number, signup section, time | `src/app/actions.ts` | Emailed through Resend to `LEAD_EMAIL_TO` (default info@3innovators.com). Optionally `EARLY_LIST_WEBHOOK_URL` | Medifyles team; Resend as processor | 30 days after the launch message, or until 31 Dec 2027 if no launch (`SITE.earlyList`) | On request to `SITE.privacyEmail`; the team deletes the email and any webhook row |
+| Early-list mobile number, signup section, time | `src/app/actions.ts` | Emailed through Resend to `LEAD_EMAIL_TO` (default info@medifyles.com). Optionally `EARLY_LIST_WEBHOOK_URL` | Medifyles team; Resend as processor | 30 days after the launch message, or until 31 Dec 2027 if no launch (`SITE.earlyList`) | On request to `SITE.privacyEmail`; the team deletes the email and any webhook row |
 | Server logs (IP, path, time) | Hosting provider | Host | Host, team | Host default | n/a |
+| "Write to us" name (optional), email, message | `sendMessage` in `src/app/actions.ts`, form on /help | Emailed through Resend to `CONTACT_EMAIL_TO` (default info@medifyles.com), reply-to the visitor | Medifyles team; Resend as processor | Until resolved, max 12 months | On request, or the team deletes the thread |
 | Theme choice | `src/lib/prefs.ts` | Visitor's browser `localStorage` only | Visitor | Until cleared | Clear site data |
 
 No analytics, ad or tracking scripts are loaded (checked: no analytics packages or tags in `src/`). Fonts are self-hosted at build time by `next/font`.
